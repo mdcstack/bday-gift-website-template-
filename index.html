@@ -644,9 +644,7 @@
           Close your eyes, make a wish, <br/>
           <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-roseGold to-vibrantPink">then blow into your mic to extinguish</span>
         </h3>
-        <p class="font-sans text-[11px] text-dustyRose/80 mt-0.5">
-          Blow sustained breath on your phone's microphone or tap the candles ✨
-        </p>
+        
       </div>
 
       <!-- Interactive Blow Progress Meter & Target Limit Indicator -->
@@ -678,16 +676,7 @@
         </div>
 
         <!-- Metric Labels: Current Power vs Extinguish Limit Goal -->
-        <div class="w-full flex items-center justify-between text-[9px] font-mono tracking-wider text-dustyRose/90 px-1">
-          <div class="flex items-center gap-1">
-            <span>Blow Power:</span>
-            <span id="blowPercentText" class="text-vibrantPink font-bold">0%</span>
-          </div>
-          <div class="flex items-center gap-1 text-amber-300 font-semibold">
-            <span>Limit to Extinguish: 100%</span>
-            <span>🎯</span>
-          </div>
-        </div>
+        
 
         <!-- Quick Mic Trigger & Fallback Manual Blow Button -->
         <div class="w-full flex items-center gap-1.5 pt-1 border-t border-wineBorder/40">
@@ -1555,7 +1544,7 @@
       const avgHigh = highEnergy / (bufferLength - lowRange);
 
       // Distinguish physical breath turbulence on the phone mic
-      const isBlowing = (avgLow > 50 && (avgLow > avgHigh * 1.25 || avgLow > 80));
+      const isBlowing = (avgLow > 75 && (avgLow > avgHigh * 1.25 || avgLow > 80));
 
       const flame1 = document.getElementById('flame1');
       const flame2 = document.getElementById('flame2');
