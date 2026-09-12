@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy 21st Birthday, Lovey ✨</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Canvas Confetti for subtle celebration sparkle -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury Serif) & Plus Jakarta Sans & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Configuration for Mature Pink Palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            noir: '#110D10',
+            velvet: '#191116',
+            moodyPlum: '#241720',
+            dustyRose: '#C98293',
+            roseGold: '#DDA7A5',
+            champagne: '#F7E7CE',
+            vibrantPink: '#F472B6',
+            softBlush: '#FCE7ED',
+            wineBorder: '#422835',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+          boxShadow: {
+            'pinkGlow': '0 0 35px rgba(244, 114, 182, 0.35)',
+            'roseCard': '0 20px 40px -15px rgba(17, 13, 16, 0.8), 0 0 1px 1px rgba(201, 130, 147, 0.25)',
+            'glassPill': '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Mobile-first lock and viewport ergonomics */
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #110D10;
+      color: #FCE7ED;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Ambient noise & subtle film grain layer */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Atmospheric luxury radial gradients */
+    .bg-mesh {
+      background: 
+        radial-gradient(circle at 50% 20%, rgba(201, 130, 147, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(138, 58, 86, 0.22) 0%, transparent 60%),
+        radial-gradient(circle at 10% 70%, rgba(66, 40, 53, 0.4) 0%, transparent 50%),
+        #110D10;
+    }
+
+    /* Cinematic text flash keyframes */
+    @keyframes flashTextIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(16px);
+        filter: blur(12px);
+      }
+      35% {
+        opacity: 1;
+        transform: scale(1.04) translateY(0px);
+        filter: blur(0px);
+        text-shadow: 0 0 35px rgba(244, 114, 182, 0.8), 0 0 10px rgba(255, 230, 240, 0.9);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+        filter: blur(0px);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.08) translateY(-12px);
+        filter: blur(14px);
+      }
+    }
+
+    .word-flash {
+      animation: flashTextIn 1.35s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+
+    /* Elegant continuous glow pulse */
+    @keyframes ambientBreath {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .animate-breath {
+      animation: ambientBreath 7s ease-in-out infinite;
+    }
+
+    /* Custom smooth scrollbar for reading sheet */
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(201, 130, 147, 0.3);
+      border-radius: 999px;
+    }
+    .custom-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201, 130, 147, 0.3) transparent;
+      -webkit-overflow-scrolling: touch;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    /* Wax seal button pulsing glow */
+    @keyframes sealGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(244, 114, 182, 0.3); }
+      50% { box-shadow: 0 0 28px rgba(244, 114, 182, 0.65), 0 0 8px rgba(255, 255, 255, 0.4); }
+    }
+    .seal-pulse {
+      animation: sealGlow 2.8s ease-in-out infinite;
+    }
+
+    /* Floating Heart Sprinkles */
+    @keyframes floatUpFadeOut {
+      0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(var(--tx, 0px), -320px, 0) scale(1.25) rotate(var(--rot, 20deg));
+      }
+    }
+    .floating-reaction {
+      position: fixed;
+      pointer-events: none;
+      animation: floatUpFadeOut 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 9999;
+    }
+  </style>
+</head>
+
+<body class="w-full h-full bg-mesh relative flex flex-col justify-between overflow-hidden text-softBlush">
+  
+  <!-- Film Grain Overlay -->
+  <div class="film-grain"></div>
+
+  <!-- Background Canvas for Dreamy Rose Bokeh & Floating Star Dust -->
+  <canvas id="bokehCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Ambient Light Orb in Background -->
+  <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-vibrantPink/10 rounded-full blur-[95px] pointer-events-none z-0 animate-breath"></div>
+
+  <!-- Header Bar -->
+  <header class="relative z-40 w-full max-w-md mx-auto px-5 pt-4 pb-2 flex items-center justify-between">
+    <div class="flex items-center space-x-2 bg-velvet/60 backdrop-blur-md px-3 py-1 rounded-full border border-wineBorder shadow-glassPill">
+      <span class="w-1.5 h-1.5 rounded-full bg-vibrantPink animate-pulse"></span>
+      <span class="text-[11px] uppercase tracking-widest font-medium text-roseGold/90">21st Chapter</span>
+    </div>
+
+    <!-- Sound & Ambient Trigger -->
+    <button id="soundToggle" onclick="toggleSound()" class="w-8 h-8 rounded-full bg-velvet/60 backdrop-blur-md border border-wineBorder flex items-center justify-center text-xs active:scale-90 transition shadow-glassPill text-roseGold" aria-label="Toggle Sound">
+      <span id="soundIcon">🔔</span>
+    </button>
+  </header>
+
+  <!-- Main Multi-Scene Stage -->
+  <main class="relative z-20 flex-1 w-full max-w-md mx-auto flex flex-col items-center justify-center px-5 py-2">
+
+    <!-- ================= SCENE 1: CINEMATIC WORD-BY-WORD INTRO ================= -->
+    <section id="introScene" class="w-full h-full flex flex-col items-center justify-center text-center cursor-pointer select-none" onclick="triggerImmediateIntro()">
+      
+      <!-- Tiny whisper indicator -->
+      <div id="introHint" class="absolute top-20 text-[11px] tracking-[0.25em] uppercase text-dustyRose/60 transition-opacity duration-700">
+        Turn sound on & tap anywhere ✨
+      </div>
+
+      <!-- Center Container for Flashing Words -->
+      <div class="relative w-full h-44 flex items-center justify-center">
+        <!-- Word display element -->
+        <h1 id="flashingWord" class="font-serif text-6xl sm:text-7xl font-bold tracking-wide italic text-transparent bg-clip-text bg-gradient-to-b from-softBlush via-vibrantPink to-dustyRose drop-shadow-[0_0_25px_rgba(244,114,182,0.6)]">
+          <!-- Text dynamically swapped in JS: Happy -> Birthday -> To -> You -->
+        </h1>
+      </div>
+
+      <!-- Elegant subtext that fades in together after sequence -->
+      <p id="introPostscript" class="font-serif text-sm tracking-widest text-roseGold/75 uppercase opacity-0 transition-opacity duration-1000 mt-2">
+        A special dedication for someone so dear
+      </p>
+
+      <!-- Skip Button for instant jump -->
+      <button id="skipBtn" onclick="skipToCard(event)" class="mt-8 text-xs tracking-wider text-dustyRose/60 hover:text-softBlush transition-colors opacity-0">
+        Skip intro →
+      </button>
+    </section>
+
+    <!-- ================= SCENE 2: MATURE ELEGANT BIRTHDAY LANDING CARD ================= -->
+    <section id="cardScene" class="w-full h-full hidden flex-col items-center justify-center text-center">
+      
+      <div class="w-full max-w-sm bg-velvet/85 backdrop-blur-xl border border-wineBorder/80 rounded-3xl p-6 shadow-roseCard relative overflow-hidden transition-all duration-700 transform">
+        
+        <!-- Corner Rose Gold Filigree Details -->
+        <div class="absolute top-3 left-3 text-roseGold/25 text-xs select-none">✦</div>
+        <div class="absolute top-3 right-3 text-roseGold/25 text-xs select-none">✦</div>
+        <div class="absolute bottom-3 left-3 text-roseGold/25 text-xs select-none">✦</div>
+        <div class="absolute bottom-3 right-3 text-roseGold/25 text-xs select-none">✦</div>
+
+        <!-- Delicate Header Pill -->
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-moodyPlum/90 border border-wineBorder text-[11px] font-semibold tracking-wider text-vibrantPink uppercase mb-4 shadow-inner">
+          <span>🥀</span>
+          <span>To My Favorite Presence</span>
+        </div>
+
+        <h2 class="font-serif text-3xl font-bold text-softBlush leading-tight tracking-wide">
+          Happy 21st Birthday, <br/>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush">Lovey ko</span>
+        </h2>
+
+        <p class="font-sans text-xs font-light text-roseGold/80 mt-3 leading-relaxed px-2">
+          From LM to IG, late night chats, your morning voice messages, and unfiltered laughs. Today is all about celebrating the genuine, beautiful soul that you are.
+        </p>
+
+        <!-- Interactive Wax Seal to Unfold Letter -->
+        <div class="my-7 flex flex-col items-center">
+          <button onclick="openLetterScene()" class="group relative w-18 h-18 rounded-full bg-gradient-to-br from-[#80223B] via-[#A83253] to-[#591427] border-2 border-roseGold/60 seal-pulse flex flex-col items-center justify-center text-softBlush active:scale-95 transition-transform duration-200">
+            <span class="text-xl group-hover:scale-110 transition-transform">💌</span>
+            <span class="text-[9px] font-mono tracking-widest uppercase font-bold text-roseGold mt-0.5">OPEN</span>
+            
+            <!-- Subtle orbital ring -->
+            <div class="absolute inset-0 -m-1 rounded-full border border-vibrantPink/30 animate-spin" style="animation-duration: 9s;"></div>
+          </button>
+          <span class="text-[11px] font-medium tracking-wide text-dustyRose/75 mt-3">Tap seal to read your letter</span>
+        </div>
+
+        <!-- Mini Feature Highlights Bar -->
+        <div class="grid grid-cols-3 gap-2 pt-3 border-t border-wineBorder/60 text-center">
+          <div class="p-1.5 rounded-xl bg-moodyPlum/50 border border-wineBorder/40">
+            <div class="text-xs">🎙️</div>
+            <div class="text-[10px] text-roseGold/70 mt-0.5 font-medium">Sweet VMS</div>
+          </div>
+          <div class="p-1.5 rounded-xl bg-moodyPlum/50 border border-wineBorder/40">
+            <div class="text-xs">✨</div>
+            <div class="text-[10px] text-roseGold/70 mt-0.5 font-medium">Pure Aura</div>
+          </div>
+          <div class="p-1.5 rounded-xl bg-moodyPlum/50 border border-wineBorder/40">
+            <div class="text-xs">🫂</div>
+            <div class="text-[10px] text-roseGold/70 mt-0.5 font-medium">Your Safe Space</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= SCENE 3: FULL HEARTFELT LETTER SHEET ================= -->
+    <section id="letterScene" class="w-full h-full hidden flex-col items-center justify-between py-1">
+      
+      <!-- Letter Container Card -->
+      <div class="w-full max-w-sm bg-[#160E14]/95 backdrop-blur-2xl border border-wineBorder/90 rounded-3xl p-5 shadow-roseCard flex flex-col my-auto max-h-[82vh] relative overflow-hidden">
+        
+        <!-- Top Letter Bar -->
+        <div class="flex items-center justify-between border-b border-wineBorder/60 pb-3 mb-2 shrink-0">
+          <div class="flex items-center space-x-2">
+            <span class="text-base">📜</span>
+            <div>
+              <h3 class="font-serif text-base font-bold text-softBlush leading-tight">My Birthday Note</h3>
+              <p class="text-[10px] text-dustyRose font-sans">Handcrafted with raw sincerity</p>
+            </div>
+          </div>
+          
+          <button onclick="goToCardScene()" class="text-xs px-2.5 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition">
+            Close ✕
+          </button>
+        </div>
+
+        <!-- Scrollable Letter Text Body -->
+        <div class="custom-scroll overflow-y-auto pr-2 text-left space-y-3.5 text-softBlush/90 text-sm font-sans font-light leading-relaxed my-1 select-text">
+          
+          <div class="border-l-2 border-vibrantPink/60 pl-3 py-0.5">
+            <p class="font-serif text-lg font-bold italic text-roseGold">
+              Hi loveyy,
+            </p>
+            <p class="text-xs text-dustyRose mt-0.5">
+              Before anything else I just want to greet you a happy birthday, happy 21st birthday po ✨
+            </p>
+          </div>
+
+          <p>
+            Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig.
+          </p>
+
+          <div class="bg-moodyPlum/40 p-3 rounded-2xl border border-wineBorder/50">
+            <h4 class="font-serif text-sm font-semibold text-vibrantPink mb-1">Your Presence Lights Me Up</h4>
+            <p class="text-xs text-softBlush/85 leading-relaxed">
+              Ewan ko might be your vibe the way you carry yourself, you dont’t sugar coat stuff you say. You speak po whatever comes to mind and I really appreciate this kind of authenticity you have. For me it’s cute, just you being yourself.
+            </p>
+          </div>
+
+          <p>
+            I’ve already mentioned this quite a lot but your vms makes me weak loveyy. It's so sweet, ang cute. Just listening to you yap makes me smile po and sudden urge to give you kisses (yes malayo ka, bat ba want ko lng to give you kisses). 
+          </p>
+
+          <p>
+            Dont get me started on your morning vms, the thought of kakagising mo lng and you're already talking to me po. Your morning vms melts me loveyy, it makes me smile, for sure good na morning ko when I get to hear you po. I did say na I might get addicted to your vms turns out am already addicted to you pala.
+          </p>
+
+          <div class="bg-moodyPlum/40 p-3 rounded-2xl border border-wineBorder/50">
+            <h4 class="font-serif text-sm font-semibold text-vibrantPink mb-1">Never A Boring Moment</h4>
+            <p class="text-xs text-softBlush/85 leading-relaxed">
+              I also appreciate how fun of a person you are. There’s no such thing as boring convos as long as am talking to you lovey. Your dating po sakin is your full of energy, na may cuteness, sweetness po lagi na halo. The way you joke around po from time to time, the reels that you send, I very appreciate each and one of your banats po. Lakas mo sa part na you ride yung trip ko, and napalag ka from time to time.
+            </p>
+          </div>
+
+          <p>
+            I appreciate din the reels that you send. Those cute banats you do through reels, kala mo lovey di ko yan papalagan ahh. Don’t try me po cuz I won’t disappoint you, palag kung palag HAHAHAHA.
+          </p>
+
+          <p>
+            I appreciate din po how you’ve become my hype man. When am slumped sa gawain, overwhelm from stuff, andyan ka po to cheer me up and switch my thinking into something more positive. Thanks sa mga reminders, for validating yung mga nararamdaman ko po. You genuinely listening to my thoughts and rants about stuff really lightens my load. I hope di ka po maumay if may pagkanegative yung mind ko loveyy, pero no worries, am trying to see the good stuff din po (Can’t be negative all the time dba).
+          </p>
+
+          <p>
+            Addition po is I appreciate you sending pics mo po from time to time. Your so cute lovey ko, with and w/out make up po. Your lips looks so tempting po and your cheeks makes me want to spoil you ng kisses. Don’t even mention the latest mirror pic you’ve send lovey, you was so tempting po, from your top to bottom lovey. That picture is burned in my memory na, your so hot lovey (wanna wrap you around my arms).
+          </p>
+
+          <p>
+            Last siguro the recent bonding ideas that you come up. Tbh yoko ng mga kdrama ewan ko, naweweirdohan ako sa accent nila, pero grabe I enjoyed the movie, might be because am watching it with you. Nagaaya ka na rin magml, our game was fun po. This time around ayusin ko na magexp para panalo tayo when we play kasama mga katropa mo. Everything that I’ve done with you was just straight up fun po and busog sa lambing mo. Busog at the same time still continues to crave and have an appetite for you. So ayun lovey, just keep being yourself po.
+          </p>
+
+          <!-- Safe Space Final Dedication Card -->
+          <div class="bg-gradient-to-br from-[#2D1A25] to-[#1D1018] p-3.5 rounded-2xl border border-vibrantPink/30 shadow-sm mt-2">
+            <p class="text-xs text-roseGold/95 leading-relaxed">
+              So far am seeing the you po na puno ng energy, the you na feeds me positive stuff, the you that cheers me up, the you na playful sa banats and charm, pero don’t lock yourself po sa mga sides mo na pinakita mo po sakin. Like I said po to just be yourself since that’s what am trying to get to know, the real you po, and am looking forward to knowing more sides of you lovey ko.
+            </p>
+            <p class="text-xs text-roseGold/95 leading-relaxed mt-2.5 font-medium">
+              If your tired then let me feel it po and I’ll be your pahinga, yoko ko lng mapagod ka po trying to maintain an image, mas prefer ko po na when you’re with me narerecharge ka since you don’t need to put a mask po when with me cuz I’ll always enjoy my time with you po kahit anong side mo pa yan lovey. 
+            </p>
+            <p class="text-xs text-softBlush mt-2.5 font-semibold">
+              Ayun lang, I don’t know what the future holds for the both of us pero all I know is I’ll keep on valuing each present day with you (cuz for me you're a very sweet, malambing, charming and cute na gift lovey ko).
+            </p>
+          </div>
+
+          <div class="pt-2 text-right">
+            <p class="font-hand text-2xl font-bold text-vibrantPink">Always in your corner,</p>
+            <p class="text-[11px] text-dustyRose font-sans">Happy 21st Birthday, beautiful ✨</p>
+          </div>
+
+        </div>
+
+        <!-- Bottom Touch Action: Kiss / Heart Sprinkler -->
+        <div class="pt-3 mt-1 border-t border-wineBorder/60 flex items-center justify-between shrink-0">
+          <span class="text-[11px] text-dustyRose font-medium">Send sweet reactions:</span>
+          <div class="flex items-center space-x-2">
+            <button onclick="spawnKiss('💋', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Kiss">💋</button>
+            <button onclick="spawnKiss('💖', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Sparkle Heart">💖</button>
+            <button onclick="spawnKiss('✨', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Sparkles">✨</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Back navigation pill -->
+      <button onclick="goToCardScene()" class="text-xs text-dustyRose/75 underline mt-2">
+        ← Back to greeting card
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- Container for Floating Hearts & Kisses Sprinkles -->
+  <div id="reactionPool" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+  <script>
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      if (soundEnabled) {
+        icon.innerText = '🔔';
+        playTone(659.25, 0.25); // E5 warm chime
+      } else {
+        icon.innerText = '🔕';
+      }
+    }
+
+    function playTone(freq = 440, duration = 0.3, delay = 0, type = 'sine', volume = 0.12) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        setTimeout(() => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          
+          gain.gain.setValueAtTime(0.001, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        }, delay * 1000);
+      } catch (e) {
+        // Audio guard
+      }
+    }
+
+    // Word transition chime sequence
+    function playWordChime(index) {
+      const frequencies = [392.00, 440.00, 523.25, 659.25]; // G4 -> A4 -> C5 -> E5
+      playTone(frequencies[index] || 523.25, 0.45, 0, 'sine', 0.14);
+    }
+
+    // Wax seal unfold harp arpeggio
+    function playUnfoldMelody() {
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, i) => {
+        playTone(freq, 0.35, i * 0.08, 'sine', 0.12);
+      });
+    }
+
+    // Kiss/Reaction gentle pop
+    function playPopTone() {
+      const notes = [698.46, 783.99, 880.00];
+      const f = notes[Math.floor(Math.random() * notes.length)];
+      playTone(f, 0.15, 0, 'triangle', 0.1);
+    }
+  </script>
+
+  <script>
+    const canvas = document.getElementById('bokehCanvas');
+    const ctx = canvas.getContext('2d');
+    let bokehParticles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class BokehOrb {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 26 + 10;
+        this.speedY = Math.random() * 0.25 + 0.08;
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.alpha = Math.random() * 0.18 + 0.04;
+        this.pulse = Math.random() * Math.PI * 2;
+        // Dusty rose and champagne colors
+        const colors = [
+          'rgba(244, 114, 182,',  // vibrant pink
+          'rgba(201, 130, 147,',  // dusty rose
+          'rgba(221, 167, 165,',  // rose gold
+          'rgba(247, 231, 206,'   // champagne
+        ];
+        this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        this.pulse += 0.02;
+        if (this.y < -40 || this.x < -40 || this.x > canvas.width + 40) {
+          this.reset();
+          this.y = canvas.height + 30;
+        }
+      }
+      draw() {
+        const currentAlpha = this.alpha * (0.7 + 0.3 * Math.sin(this.pulse));
+        ctx.save();
+        ctx.fillStyle = `${this.colorBase} ${currentAlpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 28; i++) {
+      bokehParticles.push(new BokehOrb());
+    }
+
+    function animateBokeh() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      bokehParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateBokeh);
+    }
+    animateBokeh();
+  </script>
+
+  <script>
+    const words = ["Happy", "Birthday", "To", "You"];
+    let wordIndex = 0;
+    let sequenceStarted = false;
+    let sequenceFinished = false;
+    let wordTimer = null;
+
+    const flashElement = document.getElementById('flashingWord');
+    const introHint = document.getElementById('introHint');
+    const introPostscript = document.getElementById('introPostscript');
+    const skipBtn = document.getElementById('skipBtn');
+
+    function playIntroSequence() {
+      if (sequenceStarted) return;
+      sequenceStarted = true;
+
+      // Unlock AudioContext on mobile
+      getAudioContext();
+
+      introHint.style.opacity = '0';
+      skipBtn.style.opacity = '1';
+
+      function showNextWord() {
+        if (wordIndex < words.length) {
+          const currentWord = words[wordIndex];
+          flashElement.innerText = currentWord;
+
+          // Remove & re-trigger animation class
+          flashElement.classList.remove('word-flash');
+          void flashElement.offsetWidth; // Force reflow
+          flashElement.classList.add('word-flash');
+
+          // Audio tone cue
+          playWordChime(wordIndex);
+
+          wordIndex++;
+          // 1.3 seconds per word flash transition
+          wordTimer = setTimeout(showNextWord, 1300);
+        } else {
+          // After 'You' finishes flashing, trigger final reveal
+          finishIntroSequence();
+        }
+      }
+
+      showNextWord();
+    }
+
+    function finishIntroSequence() {
+      if (sequenceFinished) return;
+      sequenceFinished = true;
+      clearTimeout(wordTimer);
+
+      flashElement.innerText = "✨";
+      flashElement.className = "font-serif text-5xl text-vibrantPink animate-bounce";
+      introPostscript.style.opacity = '1';
+
+      // Delicate golden/pink confetti spray
+      confetti({
+        particleCount: 45,
+        spread: 70,
+        origin: { y: 0.5 },
+        colors: ['#F472B6', '#C98293', '#DDA7A5', '#F7E7CE']
+      });
+
+      // Transition to Card Scene smoothly
+      setTimeout(() => {
+        transitionToScene('cardScene');
+      }, 1200);
+    }
+
+    function triggerImmediateIntro() {
+      if (!sequenceStarted) {
+        playIntroSequence();
+      }
+    }
+
+    function skipToCard(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(wordTimer);
+      transitionToScene('cardScene');
+    }
+
+    function transitionToScene(targetSceneId) {
+      const scenes = ['introScene', 'cardScene', 'letterScene'];
+      scenes.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      });
+
+      const target = document.getElementById(targetSceneId);
+      if (target) {
+        target.classList.remove('hidden');
+        target.classList.add('flex');
+      }
+    }
+
+    function openLetterScene() {
+      playUnfoldMelody();
+      
+      // Gentle celebratory burst
+      confetti({
+        particleCount: 30,
+        spread: 55,
+        origin: { y: 0.65 },
+        colors: ['#F472B6', '#C98293', '#DDA7A5']
+      });
+
+      transitionToScene('letterScene');
+    }
+
+    function goToCardScene() {
+      playTone(523.25, 0.2);
+      transitionToScene('cardScene');
+    }
+
+    // Touch Reactions & Floating Kiss generator
+    function spawnKiss(symbol, event) {
+      playPopTone();
+      const rect = event.target.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top;
+
+      for (let i = 0; i < 3; i++) {
+        createFloatingSymbol(symbol, x, y);
+      }
+    }
+
+    function createFloatingSymbol(symbol, x, y) {
+      const pool = document.getElementById('reactionPool');
+      const bubble = document.createElement('div');
+      bubble.className = 'floating-reaction text-2xl';
+      bubble.innerText = symbol;
+
+      const randomX = (Math.random() - 0.5) * 90;
+      const tx = (Math.random() - 0.5) * 140;
+      const rot = (Math.random() - 0.5) * 50;
+
+      bubble.style.left = `${x + randomX}px`;
+      bubble.style.top = `${y}px`;
+      bubble.style.setProperty('--tx', `${tx}px`);
+      bubble.style.setProperty('--rot', `${rot}deg`);
+
+      pool.appendChild(bubble);
+
+      setTimeout(() => bubble.remove(), 2200);
+    }
+
+    // Auto-kickstart initial touch awareness for mobile browsers
+    window.addEventListener('load', () => {
+      // Auto initiate intro sequence after gentle 600ms breath
+      setTimeout(() => {
+        playIntroSequence();
+      }, 600);
+    });
+  </script>
+</body>
+</html>
