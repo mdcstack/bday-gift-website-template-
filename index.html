@@ -1544,7 +1544,7 @@
       const avgHigh = highEnergy / (bufferLength - lowRange);
 
       // Distinguish physical breath turbulence on the phone mic
-      const isBlowing = (avgLow > 150 && (avgLow > avgHigh * 1.25 || avgLow > 80));
+      const isBlowing = (avgLow > 60 && (avgLow > avgHigh * 1.25 || avgLow > 80));
 
       const flame1 = document.getElementById('flame1');
       const flame2 = document.getElementById('flame2');
