@@ -259,17 +259,7 @@
   </audio>
 
   <!-- Header Bar -->
-  <header class="relative z-40 w-full max-w-md mx-auto px-5 pt-3 pb-1 flex items-center justify-between">
-    <div onclick="goToHomeScene()" class="flex items-center space-x-2 bg-velvet/60 backdrop-blur-md px-3 py-1 rounded-full border border-wineBorder shadow-glassPill cursor-pointer active:scale-95 transition">
-      <span class="w-1.5 h-1.5 rounded-full bg-vibrantPink animate-pulse"></span>
-      <span class="text-[11px] uppercase tracking-widest font-medium text-roseGold/90">21st Chapter</span>
-    </div>
 
-    <!-- Sound & Ambient Music Toggle -->
-    <button id="soundToggle" onclick="toggleSound()" class="w-8 h-8 rounded-full bg-velvet/60 backdrop-blur-md border border-wineBorder flex items-center justify-center text-xs active:scale-90 transition shadow-glassPill text-roseGold" aria-label="Toggle Sound">
-      <span id="soundIcon">🔔</span>
-    </button>
-  </header>
 
   <main class="relative z-20 flex-1 w-full max-w-md mx-auto flex flex-col items-center justify-center px-4 py-1 overflow-hidden">
 
@@ -282,11 +272,7 @@
           ✨
         </div>
 
-        <div class="h-28 flex items-center justify-center px-2">
-          <p id="gateTypewriterText" class="font-serif text-lg sm:text-xl font-medium italic text-softBlush leading-relaxed">
-            <!-- Dynamically typed via JS -->
-          </p>
-        </div>
+        
 
         <button id="gateStartBtn" onclick="unlockAudioAndStartIntro()" class="mt-4 px-7 py-3 rounded-full bg-gradient-to-r from-[#80223B] via-[#A83253] to-[#591427] border border-roseGold/50 text-softBlush text-sm font-semibold tracking-wider uppercase shadow-pinkGlow seal-pulse active:scale-95 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2">
           <span>Tap to Begin</span>
@@ -321,10 +307,7 @@
         A special dedication for someone so dear
       </p>
 
-      <!-- Skip Button -->
-      <button id="skipBtn" onclick="skipToHome(event)" class="mt-8 text-xs tracking-wider text-dustyRose/60 hover:text-softBlush transition-colors opacity-0">
-        Skip intro →
-      </button>
+      
     </section>
 
     <!-- ================= SCENE 2: HOME MENU HUB (LETTER, CAKE & GIFT) ================= -->
@@ -365,9 +348,7 @@
               <span>The 21st Birthday Letter</span>
               <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
             </h3>
-            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
-              Every thought from LM to IG, your morning VMs, and being your safe space without a mask.
-            </p>
+           
           </div>
 
           <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
@@ -393,9 +374,7 @@
               <span>Make a Wish & Blow Candles</span>
               <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
             </h3>
-            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
-              Two-tier berry cake with glowing "21" candles. Close your eyes, wish, and blow into your mic.
-            </p>
+            
           </div>
 
           <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
@@ -423,9 +402,7 @@
               <span>Unwrap Your Special Gift</span>
               <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
             </h3>
-            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
-              For your eyes only. That tempting energy, irresistible aura, and memories burned into my head.
-            </p>
+            
           </div>
 
           <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
@@ -452,8 +429,9 @@
           <span>←</span>
           <span>Home Menu</span>
         </button>
-        <span class="text-[10px] font-semibold uppercase tracking-wider text-vibrantPink">Chapter 21 • The Letter</span>
+        
       </div>
+
 
       <!-- Intro lead above envelope -->
       <div class="my-1">
@@ -539,7 +517,7 @@
           <div class="flex items-center space-x-2">
             <span class="text-base">📜</span>
             <div>
-              <h3 class="font-serif text-base font-bold text-softBlush leading-tight">My Birthday Note</h3>
+              <h3 class="font-serif text-base font-bold text-softBlush leading-tight">Your Birthday Note</h3>
               <p class="text-[10px] text-dustyRose font-sans">Handcrafted with raw sincerity</p>
             </div>
           </div>
@@ -623,13 +601,13 @@
 
           <div class="pt-2 text-right">
             <p class="font-hand text-2xl font-bold text-vibrantPink">Always in your corner,</p>
-            <p class="text-[11px] text-dustyRose font-sans">Happy 21st Birthday, beautiful ✨</p>
+            <p class="text-[11px] text-dustyRose font-sans">Happy 21st Birthday, cutiee ✨</p>
           </div>
 
           <!-- Direct Next Step Button to Blow Candles -->
           <div class="pt-3">
             <button onclick="goToCandleScene()" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-600/80 via-rose-600 to-vibrantPink border border-amber-300/40 text-softBlush text-xs font-semibold shadow-pinkGlow flex items-center justify-center gap-2 active:scale-95 transition">
-              <span>Make Your 21st Wish & Blow Candles</span>
+              <span>Make Your 21st Wish</span>
               <span>🎂 ✨</span>
             </button>
           </div>
@@ -637,26 +615,12 @@
         </div>
 
         <!-- Bottom Touch Action: Kiss / Heart Sprinkler -->
-        <div class="pt-3 mt-1 border-t border-wineBorder/60 flex items-center justify-between shrink-0">
-          <span class="text-[11px] text-dustyRose font-medium">Send sweet reactions:</span>
-          <div class="flex items-center space-x-2">
-            <button onclick="spawnKiss('💋', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Kiss">💋</button>
-            <button onclick="spawnKiss('💖', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Sparkle Heart">💖</button>
-            <button onclick="spawnKiss('✨', event)" class="w-10 h-10 rounded-xl bg-moodyPlum border border-wineBorder flex items-center justify-center text-lg active:scale-125 transition" aria-label="Sparkles">✨</button>
-          </div>
-        </div>
+        
 
       </div>
 
       <!-- Quick Navigation back -->
-      <div class="flex items-center gap-4 mt-2">
-        <button onclick="goToEnvelopeScene()" class="text-xs text-dustyRose/75 underline">
-          ← Back to envelope
-        </button>
-        <button onclick="goToHomeScene()" class="text-xs text-roseGold underline">
-          Home Menu 🏠
-        </button>
-      </div>
+      
 
     </section>
 
@@ -669,7 +633,7 @@
           <span>←</span>
           <span>Home Menu</span>
         </button>
-        <span class="text-[10px] font-semibold uppercase tracking-wider text-amber-300">Chapter 21 • The Wish</span>
+        
       </div>
 
       <!-- Guided Wish Header -->
@@ -826,13 +790,7 @@
     <section id="giftScene" class="w-full h-full hidden flex-col items-center justify-between py-2 text-center select-none overflow-y-auto custom-scroll">
       
       <!-- Top header bar with home button -->
-      <div class="w-full flex items-center justify-between px-2 pt-1 mb-1">
-        <button onclick="goToHomeScene()" class="text-xs px-3 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition flex items-center gap-1">
-          <span>←</span>
-          <span>Home Menu</span>
-        </button>
-        <span class="text-[10px] font-semibold uppercase tracking-wider text-rose-400">Chapter 21 • Seductive Elegance</span>
-      </div>
+      
 
       <!-- Gift Stage Area (Before Unboxing) -->
       <div id="giftBoxStage" class="w-full max-w-sm flex flex-col items-center justify-center my-auto py-2">
@@ -953,12 +911,9 @@
 
           <!-- Spicy Reactions Tray -->
           <div class="w-full pt-2.5 mt-2 border-t border-wineBorder/60 flex items-center justify-between">
-            <span class="text-[10px] text-dustyRose font-medium">Send her reactions:</span>
-            <div class="flex items-center space-x-2">
-              <button onclick="spawnKiss('🔥', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🔥</button>
-              <button onclick="spawnKiss('🥵', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🥵</button>
-              <button onclick="spawnKiss('💋', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">💋</button>
-              <button onclick="spawnKiss('🖤', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🖤</button>
+            <span class="text-[10px] text-dustyRose font-medium"></span>
+            <div class="flex items-center space-x-20">
+              
             </div>
           </div>
         </div>
@@ -969,15 +924,13 @@
             Re-wrap Box 🎁
           </button>
           <button onclick="goToHomeScene()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-rose-700 to-vibrantPink text-softBlush text-xs font-semibold active:scale-95 transition shadow-pinkGlow">
-            Home Hub 🏠
+            Home 🏠
           </button>
         </div>
 
       </div>
 
-      <button onclick="goToHomeScene()" class="text-xs text-dustyRose/75 underline mt-2 mb-1">
-        ← Back to Main Menu
-      </button>
+      
     </section>
 
   </main>
@@ -1359,7 +1312,7 @@
   </script>
 
   <script>
-    const typewriterQuote = "For someone who lights up every room just by being in it...";
+    const typewriterQuote = "";
     let typeIndex = 0;
     const typewriterTarget = document.getElementById('gateTypewriterText');
     const startBtn = document.getElementById('gateStartBtn');
