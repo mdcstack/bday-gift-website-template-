@@ -8,15 +8,14 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Canvas Confetti for subtle celebration sparkle -->
+  <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury Serif) & Plus Jakarta Sans & Caveat -->
+  <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind Configuration for Mature Pink Palette -->
   <script>
     tailwind.config = {
       theme: {
@@ -48,7 +47,7 @@
   </script>
 
   <style>
-    /* Mobile-first lock and viewport ergonomics */
+    /* Mobile viewport ergonomics */
     html, body {
       height: 100%;
       height: 100dvh;
@@ -62,7 +61,7 @@
       -webkit-user-select: none;
     }
 
-    /* Ambient noise & subtle film grain layer */
+    /* Subtle film grain overlay */
     .film-grain {
       position: fixed;
       inset: 0;
@@ -72,12 +71,12 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Atmospheric luxury radial gradients */
+    /* Ambient atmospheric background gradient */
     .bg-mesh {
       background: 
-        radial-gradient(circle at 50% 20%, rgba(201, 130, 147, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 50% 15%, rgba(201, 130, 147, 0.18) 0%, transparent 55%),
         radial-gradient(circle at 85% 85%, rgba(138, 58, 86, 0.22) 0%, transparent 60%),
-        radial-gradient(circle at 10% 70%, rgba(66, 40, 53, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 10% 70%, rgba(66, 40, 53, 0.45) 0%, transparent 50%),
         #110D10;
     }
 
@@ -105,12 +104,11 @@
         filter: blur(14px);
       }
     }
-
     .word-flash {
       animation: flashTextIn 1.35s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     }
 
-    /* Elegant continuous glow pulse */
+    /* Ambient continuous breathing pulse */
     @keyframes ambientBreath {
       0%, 100% { opacity: 0.35; transform: scale(1); }
       50% { opacity: 0.6; transform: scale(1.08); }
@@ -119,7 +117,7 @@
       animation: ambientBreath 7s ease-in-out infinite;
     }
 
-    /* Custom smooth scrollbar for reading sheet */
+    /* Custom smooth scrollbar for reading letter */
     .custom-scroll::-webkit-scrollbar {
       width: 4px;
     }
@@ -127,12 +125,12 @@
       background: transparent;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: rgba(201, 130, 147, 0.3);
+      background: rgba(201, 130, 147, 0.35);
       border-radius: 999px;
     }
     .custom-scroll {
       scrollbar-width: thin;
-      scrollbar-color: rgba(201, 130, 147, 0.3) transparent;
+      scrollbar-color: rgba(201, 130, 147, 0.35) transparent;
       -webkit-overflow-scrolling: touch;
       user-select: text;
       -webkit-user-select: text;
@@ -140,11 +138,11 @@
 
     /* Wax seal button pulsing glow */
     @keyframes sealGlow {
-      0%, 100% { box-shadow: 0 0 16px rgba(244, 114, 182, 0.35); }
-      50% { box-shadow: 0 0 30px rgba(244, 114, 182, 0.75), 0 0 10px rgba(255, 255, 255, 0.5); }
+      0%, 100% { box-shadow: 0 0 15px rgba(244, 114, 182, 0.3); }
+      50% { box-shadow: 0 0 28px rgba(244, 114, 182, 0.65), 0 0 8px rgba(255, 255, 255, 0.4); }
     }
     .seal-pulse {
-      animation: sealGlow 2.4s ease-in-out infinite;
+      animation: sealGlow 2.8s ease-in-out infinite;
     }
 
     /* Floating Heart Sprinkles */
@@ -165,66 +163,48 @@
       z-index: 9999;
     }
 
-    /* 3D Realistic Envelope Mechanics */
-    .envelope-perspective {
-      perspective: 1200px;
+    /* 3D Envelope folds & perspective */
+    .perspective-1000 {
+      perspective: 1000px;
     }
-    .flap-triangle {
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .envelope-flap {
       transform-origin: top center;
       transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .flap-open {
+    .envelope-open .envelope-flap {
       transform: rotateX(180deg);
-      z-index: 5 !important;
+      z-index: 5;
     }
-    .pocket-mask {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-    .letter-slide {
-      transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
-    }
-    .letter-popped {
-      transform: translateY(-135px) scale(1.03);
+    .envelope-open .envelope-letter-peek {
+      transform: translateY(-90px) scale(1.03);
+      transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s;
     }
 
-    /* Realistic Candle Flame Keyframe Flicker */
+    /* Candle flame flickering keyframes */
     @keyframes flameFlicker {
-      0%, 100% {
-        transform: scale(1) rotate(-1deg);
-        filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 22px rgba(244, 114, 182, 0.85));
-      }
-      25% {
-        transform: scale(1.08, 0.93) rotate(1.5deg);
-      }
-      50% {
-        transform: scale(0.96, 1.05) rotate(-2deg);
-        filter: drop-shadow(0 0 12px rgba(251, 191, 36, 1)) drop-shadow(0 0 30px rgba(244, 114, 182, 0.95));
-      }
-      75% {
-        transform: scale(1.03, 0.98) rotate(1.2deg);
-      }
+      0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+      25% { transform: scale(1.08, 0.95) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.9)); }
+      50% { transform: scale(0.96, 1.04) rotate(-2deg); opacity: 0.9; }
+      75% { transform: scale(1.04, 1) rotate(1deg); opacity: 1; }
     }
     .flame-active {
-      animation: flameFlicker 1.7s infinite ease-in-out;
+      animation: flameFlicker 1.1s ease-in-out infinite alternate;
       transform-origin: bottom center;
     }
     .flame-extinguished {
-      transform: scale(0) !important;
       opacity: 0 !important;
-      transition: all 0.35s cubic-bezier(0.4, 0, 1, 1) !important;
+      transform: scale(0.1) translateY(-10px) !important;
+      transition: all 0.45s ease-out !important;
     }
 
-    /* Drifting smoke particles on extinguishing */
+    /* Rising smoke puffs */
     @keyframes smokeDrift {
-      0% {
-        opacity: 0.8;
-        transform: translateY(0) scale(0.6) translateX(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-60px) scale(2.2) translateX(var(--sx, 12px));
-      }
+      0% { opacity: 0.8; transform: translateY(0) scale(0.6); }
+      50% { opacity: 0.5; transform: translateY(-30px) scale(1.4) rotate(15deg); }
+      100% { opacity: 0; transform: translateY(-65px) scale(2.2) rotate(-20deg); }
     }
     .smoke-particle {
       position: absolute;
@@ -237,11 +217,27 @@
       animation: smokeDrift 1.25s ease-out forwards;
     }
 
-    /* Cake scalloped frosting effect */
-    .frosting-scallop {
-      background-image: radial-gradient(circle at 10px 0, transparent 8px, #361a29 8.5px);
-      background-size: 20px 20px;
-      background-repeat: repeat-x;
+    /* Gift Box 3D Pop & Untie Animations */
+    @keyframes ribbonFlyLeft {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-80px, -60px) rotate(-35deg); opacity: 0; }
+    }
+    @keyframes ribbonFlyRight {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(80px, -60px) rotate(35deg); opacity: 0; }
+    }
+    @keyframes lidPopOff {
+      0% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-45px) rotate(-8deg); }
+      100% { transform: translateY(-130px) rotate(-22deg) scale(0.85); opacity: 0; }
+    }
+    .ribbon-fly-l { animation: ribbonFlyLeft 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .ribbon-fly-r { animation: ribbonFlyRight 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .lid-popped { animation: lidPopOff 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+
+    /* Spicy Carousel Glow */
+    .carousel-glow {
+      box-shadow: 0 15px 40px -10px rgba(244, 63, 94, 0.35), 0 0 1px 1px rgba(244, 114, 182, 0.3);
     }
   </style>
 </head>
@@ -257,176 +253,286 @@
   <!-- Ambient Light Orb in Background -->
   <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-vibrantPink/10 rounded-full blur-[95px] pointer-events-none z-0 animate-breath"></div>
 
+  <!-- Hidden background audio player (plays warm acoustic piano) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mp3">
+  </audio>
+
   <!-- Header Bar -->
-  <header class="relative z-40 w-full max-w-md mx-auto px-5 pt-4 pb-2 flex items-center justify-between">
-    <div class="flex items-center space-x-2 bg-velvet/60 backdrop-blur-md px-3 py-1 rounded-full border border-wineBorder shadow-glassPill">
+  <header class="relative z-40 w-full max-w-md mx-auto px-5 pt-3 pb-1 flex items-center justify-between">
+    <div onclick="goToHomeScene()" class="flex items-center space-x-2 bg-velvet/60 backdrop-blur-md px-3 py-1 rounded-full border border-wineBorder shadow-glassPill cursor-pointer active:scale-95 transition">
       <span class="w-1.5 h-1.5 rounded-full bg-vibrantPink animate-pulse"></span>
       <span class="text-[11px] uppercase tracking-widest font-medium text-roseGold/90">21st Chapter</span>
     </div>
 
-    <!-- Sound & Ambient Trigger -->
+    <!-- Sound & Ambient Music Toggle -->
     <button id="soundToggle" onclick="toggleSound()" class="w-8 h-8 rounded-full bg-velvet/60 backdrop-blur-md border border-wineBorder flex items-center justify-center text-xs active:scale-90 transition shadow-glassPill text-roseGold" aria-label="Toggle Sound">
       <span id="soundIcon">🔔</span>
     </button>
   </header>
 
-  <!-- Background Music Audio Element (Can be replaced with local 'music.mp3') -->
-  <audio id="bgMusic" loop preload="auto">
-    <!-- Gentle aesthetic piano & ambient strings (royalty-free CDN stream) -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
-  </audio>
+  <main class="relative z-20 flex-1 w-full max-w-md mx-auto flex flex-col items-center justify-center px-4 py-1 overflow-hidden">
 
-  <!-- Main Multi-Scene Stage -->
-  <main class="relative z-20 flex-1 w-full max-w-md mx-auto flex flex-col items-center justify-center px-5 py-2">
-
-    <!-- ================= SCENE 0: TYPEWRITER GATE / INTRO SCENE ================= -->
-    <section id="gateScene" class="w-full h-full flex flex-col items-center justify-center text-center px-4 select-none">
+    <!-- ================= SCENE 0: TYPEWRITER GATE & AUDIO UNLOCK ================= -->
+    <section id="gateScene" class="w-full h-full flex flex-col items-center justify-center text-center px-2 select-none">
       
-      <!-- Ambient decorative tag -->
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-moodyPlum/80 border border-wineBorder text-[10px] font-semibold tracking-widest text-roseGold uppercase mb-5 shadow-glassPill">
-        <span>🎧</span>
-        <span>Headphones Recommended</span>
-      </div>
+      <div class="w-full max-w-sm bg-velvet/85 backdrop-blur-xl border border-wineBorder/80 rounded-3xl p-7 shadow-roseCard flex flex-col items-center">
+        
+        <div class="w-14 h-14 rounded-full bg-moodyPlum border border-wineBorder flex items-center justify-center text-2xl shadow-inner mb-4">
+          ✨
+        </div>
 
-      <!-- Typewriter Container -->
-      <div class="min-h-[90px] flex items-center justify-center max-w-xs">
-        <p id="typewriterText" class="font-serif text-xl sm:text-2xl text-softBlush leading-relaxed italic tracking-wide">
-          <!-- Text will be typed here by JavaScript -->
-        </p>
-      </div>
+        <div class="h-28 flex items-center justify-center px-2">
+          <p id="gateTypewriterText" class="font-serif text-lg sm:text-xl font-medium italic text-softBlush leading-relaxed">
+            <!-- Dynamically typed via JS -->
+          </p>
+        </div>
 
-      <!-- Pulsing interactive gate button -->
-      <div id="gateActionArea" class="mt-8 opacity-0 transition-opacity duration-700 flex flex-col items-center">
-        <button onclick="startExperience()" class="group relative px-6 py-3.5 rounded-full bg-gradient-to-r from-[#A83253] via-vibrantPink to-dustyRose text-softBlush text-xs font-semibold tracking-widest uppercase shadow-pinkGlow active:scale-95 transition-all duration-300 flex items-center gap-2.5">
+        <button id="gateStartBtn" onclick="unlockAudioAndStartIntro()" class="mt-4 px-7 py-3 rounded-full bg-gradient-to-r from-[#80223B] via-[#A83253] to-[#591427] border border-roseGold/50 text-softBlush text-sm font-semibold tracking-wider uppercase shadow-pinkGlow seal-pulse active:scale-95 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2">
           <span>Tap to Begin</span>
-          <span class="text-sm transition-transform group-hover:translate-x-1">✨</span>
-          
-          <!-- Outer pulsing glow ring -->
-          <div class="absolute inset-0 rounded-full border border-vibrantPink/50 animate-ping opacity-30"></div>
+          <span>✨</span>
         </button>
-        <span class="text-[11px] text-dustyRose/70 font-sans mt-3">Touch anywhere to start the music</span>
+
+        <p class="text-[10px] text-dustyRose/60 mt-4 tracking-widest uppercase font-mono">
+          Handcrafted with sincere appreciation
+        </p>
+
       </div>
 
     </section>
 
     <!-- ================= SCENE 1: CINEMATIC WORD-BY-WORD INTRO ================= -->
-    <section id="introScene" class="w-full h-full hidden flex-col items-center justify-center text-center cursor-pointer select-none">
+    <section id="introScene" class="w-full h-full hidden flex-col items-center justify-center text-center cursor-pointer select-none" onclick="triggerImmediateIntro()">
       
       <!-- Tiny whisper indicator -->
-      <div id="introHint" class="absolute top-20 text-[11px] tracking-[0.25em] uppercase text-dustyRose/60 transition-opacity duration-700">
-        Playing for you ✨
+      <div id="introHint" class="absolute top-16 text-[11px] tracking-[0.25em] uppercase text-dustyRose/60 transition-opacity duration-700">
+        Listen closely ✨
       </div>
 
       <!-- Center Container for Flashing Words -->
       <div class="relative w-full h-44 flex items-center justify-center">
-        <!-- Word display element -->
         <h1 id="flashingWord" class="font-serif text-6xl sm:text-7xl font-bold tracking-wide italic text-transparent bg-clip-text bg-gradient-to-b from-softBlush via-vibrantPink to-dustyRose drop-shadow-[0_0_25px_rgba(244,114,182,0.6)]">
           <!-- Text dynamically swapped in JS: Happy -> Birthday -> To -> You -->
         </h1>
       </div>
 
-      <!-- Elegant subtext that fades in together after sequence -->
+      <!-- Postscript -->
       <p id="introPostscript" class="font-serif text-sm tracking-widest text-roseGold/75 uppercase opacity-0 transition-opacity duration-1000 mt-2">
         A special dedication for someone so dear
       </p>
 
-      <!-- Skip Button for instant jump -->
-      <button id="skipBtn" onclick="skipToCard(event)" class="mt-8 text-xs tracking-wider text-dustyRose/60 hover:text-softBlush transition-colors opacity-0">
+      <!-- Skip Button -->
+      <button id="skipBtn" onclick="skipToHome(event)" class="mt-8 text-xs tracking-wider text-dustyRose/60 hover:text-softBlush transition-colors opacity-0">
         Skip intro →
       </button>
     </section>
 
-    <!-- ================= SCENE 2: GRAND LUXURY 3D ENVELOPE (THE HIGHLIGHT) ================= -->
-    <section id="cardScene" class="w-full h-full hidden flex-col items-center justify-center text-center select-none py-4">
+    <!-- ================= SCENE 2: HOME MENU HUB (LETTER, CAKE & GIFT) ================= -->
+    <section id="homeScene" class="w-full h-full hidden flex-col items-center justify-between py-2 text-center select-none overflow-y-auto custom-scroll">
       
-      <!-- Greeting Header above the Envelope -->
-      <div class="mb-4 transform transition-all duration-700" id="envelopeHeadline">
-        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-moodyPlum/90 border border-wineBorder text-[11px] font-semibold tracking-wider text-vibrantPink uppercase mb-2 shadow-inner">
-          <span>🥀</span>
-          <span>Chapter 21 • Private Delivery</span>
+      <!-- Hub Header Pill & Title -->
+      <div class="pt-1 pb-2">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-moodyPlum/90 border border-wineBorder text-[10px] font-semibold tracking-wider text-vibrantPink uppercase mb-1 shadow-inner">
+          <span>👑</span>
+          <span>Chapter 21 Celebration</span>
         </div>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-softBlush tracking-wide leading-tight">
-          A Letter For <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush">Lovey</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-softBlush tracking-wide leading-snug">
+          Happy Birthday, <br/>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush">Lovey ko</span>
         </h2>
-        <p class="font-sans text-[11px] text-dustyRose/80 mt-0.5">Sealed with sincerity, waiting to be unraveled</p>
+        <p class="font-sans text-[11px] text-dustyRose/80 mt-1 max-w-xs mx-auto">
+          I've put together something special for you. Choose which chapter you'd like to experience first:
+        </p>
       </div>
 
-      <!-- Grand Envelope Stage -->
-      <div class="relative w-full max-w-[340px] h-[255px] envelope-perspective flex items-center justify-center mx-auto my-2">
+      <!-- Vertical 3-Card Choices Grid -->
+      <div class="w-full max-w-sm flex flex-col space-y-3 my-auto py-1">
         
-        <!-- Ambient Back Glow Behind Envelope -->
-        <div class="absolute inset-0 bg-vibrantPink/20 blur-2xl rounded-3xl -z-10 scale-90"></div>
-
-        <!-- 3D Envelope Body Container -->
-        <div id="envelopeContainer" class="relative w-full h-[225px] rounded-2xl bg-[#1d1219] border border-wineBorder shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85),0_0_20px_rgba(201,130,147,0.2)] overflow-visible">
+        <!-- CARD 1: THE 21ST BIRTHDAY LETTER -->
+        <div onclick="goToEnvelopeScene()" class="group relative w-full rounded-2xl bg-gradient-to-br from-[#24151F]/90 to-[#160B13]/95 border border-wineBorder hover:border-vibrantPink/60 p-4 text-left shadow-[0_12px_28px_rgba(0,0,0,0.6)] active:scale-[0.98] transition-all duration-300 cursor-pointer overflow-hidden">
           
-          <!-- Realistic Inner Lining / Pattern -->
-          <div class="absolute inset-2 rounded-xl bg-gradient-to-b from-[#2d1825] to-[#160d14] opacity-90 border border-wineBorder/40"></div>
-
-          <!-- Inside Letter Preview (Slides upward upon opening) -->
-          <div id="envelopeLetterPeek" class="letter-slide absolute inset-x-4 top-4 bottom-3 rounded-xl bg-gradient-to-b from-[#241521] via-[#1c111a] to-[#140b12] border border-roseGold/30 p-4 text-left shadow-lg z-10 pointer-events-none flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between border-b border-wineBorder/60 pb-1.5 mb-2">
-                <span class="font-serif text-xs font-semibold text-roseGold italic">Happy 21st, Lovey ✨</span>
-                <span class="text-[9px] uppercase tracking-wider text-dustyRose">CONFIDENTIAL</span>
-              </div>
-              <p class="font-serif text-[11px] italic text-softBlush/90 line-clamp-3 leading-relaxed">
-                "Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig..."
-              </p>
+          <div class="flex items-start justify-between">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#80223B] to-[#42121E] border border-roseGold/40 flex items-center justify-center text-2xl shadow-inner group-hover:scale-105 transition-transform">
+              💌
             </div>
-            <div class="flex items-center justify-between pt-1 text-[9px] text-dustyRose/75">
-              <span>Touch anywhere to read fully</span>
-              <span>✦</span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-moodyPlum/80 border border-wineBorder text-[9px] font-semibold tracking-wider text-roseGold uppercase">
+              Wax Sealed
+            </span>
+          </div>
+
+          <div class="mt-3">
+            <h3 class="font-serif text-lg font-bold text-softBlush group-hover:text-vibrantPink transition-colors flex items-center gap-1.5">
+              <span>The 21st Birthday Letter</span>
+              <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+            </h3>
+            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
+              Every thought from LM to IG, your morning VMs, and being your safe space without a mask.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
+            <span>Read your personal note</span>
+            <span class="text-vibrantPink font-semibold">Break Wax Seal ✦</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: BLOW THE "21" CANDLES -->
+        <div onclick="goToCandleScene()" class="group relative w-full rounded-2xl bg-gradient-to-br from-[#24151F]/90 to-[#160B13]/95 border border-wineBorder hover:border-amber-300/60 p-4 text-left shadow-[0_12px_28px_rgba(0,0,0,0.6)] active:scale-[0.98] transition-all duration-300 cursor-pointer overflow-hidden">
+          
+          <div class="flex items-start justify-between">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#683023] to-[#38160E] border border-amber-300/40 flex items-center justify-center text-2xl shadow-inner group-hover:scale-105 transition-transform">
+              🎂
             </div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-moodyPlum/80 border border-wineBorder text-[9px] font-semibold tracking-wider text-amber-300 uppercase">
+              Interactive Cake
+            </span>
           </div>
 
-          <!-- Front Pocket Fold Left & Right Shadows (Stylized Enclosure) -->
-          <div class="absolute inset-0 z-20 pointer-events-none">
-            <!-- Left & Right Fold Shadows -->
-            <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(25, 17, 22, 0.95) 0%, rgba(20, 13, 18, 0.85) 50%, rgba(36, 23, 32, 0.95) 100%); clip-path: polygon(0 0, 50% 50%, 0 100%);"></div>
-            <div class="absolute inset-0" style="background: linear-gradient(225deg, rgba(25, 17, 22, 0.95) 0%, rgba(20, 13, 18, 0.85) 50%, rgba(36, 23, 32, 0.95) 100%); clip-path: polygon(100% 0, 50% 50%, 100% 100%);"></div>
-            <!-- Bottom Fold Triangle -->
-            <div class="absolute inset-0" style="background: linear-gradient(0deg, #181016 0%, #291724 60%, rgba(41,23,36,0.9) 100%); clip-path: polygon(0 100%, 50% 48%, 100% 100%); border-bottom: 1px solid rgba(201, 130, 147, 0.3);"></div>
+          <div class="mt-3">
+            <h3 class="font-serif text-lg font-bold text-softBlush group-hover:text-amber-200 transition-colors flex items-center gap-1.5">
+              <span>Make a Wish & Blow Candles</span>
+              <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+            </h3>
+            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
+              Two-tier berry cake with glowing "21" candles. Close your eyes, wish, and blow into your mic.
+            </p>
           </div>
 
-          <!-- Triangular Top Flap (Flips 180deg backward to reveal opening) -->
-          <div id="envelopeFlap" class="flap-triangle absolute inset-x-0 top-0 h-[120px] bg-gradient-to-b from-[#381e2e] via-[#2c1725] to-[#1c1018] border-t border-roseGold/40 z-30 shadow-md">
-            <!-- Delicate Filigree border on flap -->
-            <div class="w-full h-full flex items-start justify-center pt-2">
-              <span class="text-roseGold/30 text-xs">✦</span>
+          <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
+            <span>Uses mic breath detection</span>
+            <span class="text-amber-300 font-semibold">Blow Candles 🌬️</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: THE ALLURING GIFT BOX (SPICY REVELATION) -->
+        <div onclick="goToGiftScene()" class="group relative w-full rounded-2xl bg-gradient-to-br from-[#29111F]/90 to-[#190915]/95 border border-wineBorder hover:border-rose-500/60 p-4 text-left shadow-[0_12px_28px_rgba(0,0,0,0.65)] active:scale-[0.98] transition-all duration-300 cursor-pointer overflow-hidden">
+          
+          <div class="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-rose-500/10 blur-xl group-hover:bg-rose-500/25 transition-all"></div>
+
+          <div class="flex items-start justify-between relative z-10">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#9E1B48] to-[#540822] border border-roseGold/40 flex items-center justify-center text-2xl shadow-inner group-hover:scale-105 transition-transform">
+              🎁
             </div>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-moodyPlum/80 border border-wineBorder text-[9px] font-semibold tracking-wider text-rose-400 uppercase">
+              Exclusive • Mature
+            </span>
           </div>
 
-          <!-- The Wax Seal Stamp (The interactive trigger in center) -->
-          <div id="waxSealWrapper" class="absolute top-[85px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center">
-            <button id="waxSealBtn" onclick="triggerEnvelopeOpen()" class="group relative w-16 h-16 rounded-full bg-gradient-to-br from-[#9E2A4B] via-[#C93B62] to-[#69142B] border-2 border-roseGold/80 seal-pulse flex flex-col items-center justify-center text-softBlush active:scale-95 transition-transform duration-200 cursor-pointer shadow-[0_8px_20px_rgba(201,59,98,0.5)]">
-              <span class="text-xl group-hover:scale-110 transition-transform select-none">💌</span>
-              <span class="text-[8px] font-mono tracking-widest uppercase font-bold text-softBlush/95 mt-0.5 select-none">OPEN</span>
-              <!-- Subtle gold halo ring -->
-              <div class="absolute inset-0 -m-1 rounded-full border border-roseGold/40 animate-spin" style="animation-duration: 8s;"></div>
-            </button>
+          <div class="mt-3 relative z-10">
+            <h3 class="font-serif text-lg font-bold text-softBlush group-hover:text-vibrantPink transition-colors flex items-center gap-1.5">
+              <span>Unwrap Your Special Gift</span>
+              <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+            </h3>
+            <p class="font-sans text-[11px] text-dustyRose/85 mt-1 leading-relaxed">
+              For your eyes only. That tempting energy, irresistible aura, and memories burned into my head.
+            </p>
           </div>
 
+          <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
+            <span>Tap to open mystery box</span>
+            <span class="text-rose-400 font-semibold">Unbox Gift ✦ 🔥</span>
+          </div>
         </div>
 
       </div>
 
-      <!-- Action hint underneath the envelope -->
-      <div id="envelopeFooterHint" class="mt-4 transition-opacity duration-500">
-        <p class="text-xs font-medium tracking-wide text-roseGold/90 flex items-center justify-center gap-1.5">
-          <span class="inline-block w-1.5 h-1.5 rounded-full bg-vibrantPink animate-ping"></span>
-          Tap the wax seal to break & open
-        </p>
-        <p class="text-[10px] text-dustyRose/60 mt-1">Specially written for your 21st</p>
+      <!-- Ambient Footer Note -->
+      <div class="text-[10px] text-dustyRose/60 pt-2 pb-1">
+        Handcrafted for your 21st • Tap any card to begin
       </div>
 
     </section>
 
-    <!-- ================= SCENE 3: FULL HEARTFELT LETTER SHEET ================= -->
+    <!-- ================= SCENE 3: GRAND 3D ENVELOPE STAGE ================= -->
+    <section id="cardScene" class="w-full h-full hidden flex-col items-center justify-between py-2 text-center select-none">
+      
+      <!-- Top header bar with home button -->
+      <div class="w-full flex items-center justify-between px-2 pt-1 mb-1">
+        <button onclick="goToHomeScene()" class="text-xs px-3 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition flex items-center gap-1">
+          <span>←</span>
+          <span>Home Menu</span>
+        </button>
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-vibrantPink">Chapter 21 • The Letter</span>
+      </div>
+
+      <!-- Intro lead above envelope -->
+      <div class="my-1">
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-softBlush leading-tight">
+          A Letter Sealed For <br/>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush">Lovey ko</span>
+        </h2>
+        <p class="font-sans text-[11px] text-dustyRose/80 mt-1">Tap the wax seal to break open your letter</p>
+      </div>
+
+      <!-- GRAND 3D ENVELOPE COMPONENT -->
+      <div id="envelopeContainer" class="relative w-full max-w-[310px] h-[210px] perspective-1000 my-auto cursor-pointer" onclick="openLetterFromEnvelope()">
+        
+        <!-- Ambient back-shadow of envelope -->
+        <div class="absolute inset-x-4 -bottom-4 h-8 bg-black/70 blur-xl rounded-full pointer-events-none"></div>
+
+        <!-- Envelope Back Face -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#1C0F17] to-[#12080F] rounded-2xl border border-wineBorder shadow-roseCard overflow-hidden">
+          
+          <!-- Inner letter paper peek that slides up on tap -->
+          <div id="letterPeek" class="envelope-letter-peek absolute inset-x-3 top-3 bottom-2 bg-gradient-to-b from-[#2B1622] to-[#1A0C15] rounded-xl border border-roseGold/30 p-3 text-left shadow-md flex flex-col justify-between transform transition-transform">
+            <div>
+              <div class="flex items-center justify-between border-b border-wineBorder/50 pb-1 mb-1.5">
+                <span class="font-serif text-xs italic text-vibrantPink font-bold">Hi loveyy,</span>
+                <span class="text-[9px] text-roseGold/70 font-mono">21st Chapter</span>
+              </div>
+              <p class="text-[10px] text-softBlush/85 leading-relaxed font-sans line-clamp-3">
+                "Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig..."
+              </p>
+            </div>
+            <span class="text-[9px] text-dustyRose/70 italic text-right">Unfolding letter...</span>
+          </div>
+
+          <!-- Bottom & Side Pockets (Triangular Fold Shapes) -->
+          <div class="absolute inset-0 pointer-events-none z-10">
+            <!-- Left pocket flap -->
+            <div class="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-tr from-[#190C14] to-transparent border-l border-wineBorder/40" style="clip-path: polygon(0 0, 100% 100%, 0 100%);"></div>
+            <!-- Right pocket flap -->
+            <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-tl from-[#190C14] to-transparent border-r border-wineBorder/40" style="clip-path: polygon(100% 0, 0 100%, 100% 100%);"></div>
+            <!-- Bottom pocket flap -->
+            <div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#200F1B] via-[#1A0C16] to-transparent border-b border-wineBorder/60" style="clip-path: polygon(0 100%, 50% 25%, 100% 100%);"></div>
+          </div>
+
+          <!-- Top Fold Triangular Flap with 3D Rotate -->
+          <div id="envelopeFlap" class="envelope-flap absolute inset-x-0 top-0 h-3/5 bg-gradient-to-b from-[#2A1423] to-[#1F0E1A] border-t-2 border-wineBorder/80 z-20 shadow-md transform-style-3d" style="clip-path: polygon(0 0, 100% 0, 50% 100%);">
+            <!-- Filigree border accent on flap edge -->
+            <div class="w-full h-full relative">
+              <div class="absolute top-2 inset-x-0 flex justify-center text-roseGold/20 text-[10px]">✦ ✦ ✦</div>
+            </div>
+          </div>
+
+          <!-- WAX SEAL INTERACTIVE BUTTON (Centered over the flap tip) -->
+          <div id="waxSealButton" class="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#80223B] via-[#A83253] to-[#591427] border-2 border-roseGold/70 seal-pulse flex flex-col items-center justify-center text-softBlush active:scale-90 transition-transform duration-200 shadow-[0_8px_20px_rgba(168,50,83,0.5)]">
+              <span class="text-base group-hover:scale-110 transition-transform">💌</span>
+              <span class="text-[8px] font-mono tracking-widest uppercase font-bold text-roseGold">OPEN</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Action Prompt under Envelope -->
+      <div class="pb-2">
+        <p class="text-xs font-medium tracking-wide text-roseGold/90 flex items-center justify-center gap-1.5 animate-pulse">
+          <span>✦</span>
+          <span>Tap the wax seal to unwrap</span>
+          <span>✦</span>
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ================= SCENE 4: FULL HEARTFELT LETTER SHEET ================= -->
     <section id="letterScene" class="w-full h-full hidden flex-col items-center justify-between py-1">
       
       <!-- Letter Container Card -->
-      <div class="w-full max-w-sm bg-[#160E14]/95 backdrop-blur-2xl border border-wineBorder/90 rounded-3xl p-5 shadow-roseCard flex flex-col my-auto max-h-[82vh] relative overflow-hidden">
+      <div class="w-full max-w-sm bg-[#160E14]/95 backdrop-blur-2xl border border-wineBorder/90 rounded-3xl p-5 shadow-roseCard flex flex-col my-auto max-h-[84vh] relative overflow-hidden">
         
         <!-- Top Letter Bar -->
         <div class="flex items-center justify-between border-b border-wineBorder/60 pb-3 mb-2 shrink-0">
@@ -438,9 +544,14 @@
             </div>
           </div>
           
-          <button onclick="goToCardScene()" class="text-xs px-2.5 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition">
-            Close ✕
-          </button>
+          <div class="flex items-center gap-1.5">
+            <button onclick="goToHomeScene()" class="text-xs px-2.5 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition">
+              Home 🏠
+            </button>
+            <button onclick="goToEnvelopeScene()" class="text-xs px-2.5 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition">
+              Close ✕
+            </button>
+          </div>
         </div>
 
         <!-- Scrollable Letter Text Body -->
@@ -515,6 +626,14 @@
             <p class="text-[11px] text-dustyRose font-sans">Happy 21st Birthday, beautiful ✨</p>
           </div>
 
+          <!-- Direct Next Step Button to Blow Candles -->
+          <div class="pt-3">
+            <button onclick="goToCandleScene()" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-600/80 via-rose-600 to-vibrantPink border border-amber-300/40 text-softBlush text-xs font-semibold shadow-pinkGlow flex items-center justify-center gap-2 active:scale-95 transition">
+              <span>Make Your 21st Wish & Blow Candles</span>
+              <span>🎂 ✨</span>
+            </button>
+          </div>
+
         </div>
 
         <!-- Bottom Touch Action: Kiss / Heart Sprinkler -->
@@ -527,203 +646,338 @@
           </div>
         </div>
 
-        <!-- Next Chapter: 21st Cake & Candle Ritual Call to Action -->
-        <div class="pt-3 mt-2 border-t border-wineBorder/60 flex flex-col items-center shrink-0">
-          <button onclick="goToCandleScene()" class="w-full group relative py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#8C2341] via-vibrantPink to-dustyRose text-softBlush text-xs font-semibold tracking-widest uppercase shadow-pinkGlow active:scale-95 transition-all flex items-center justify-center gap-2">
-            <span>Make Your 21st Wish & Blow Candles</span>
-            <span class="text-base group-hover:scale-125 transition-transform">🎂 ✨</span>
-          </button>
-          <span class="text-[10px] text-dustyRose/70 font-sans mt-1.5">A special interactive ritual awaits</span>
-        </div>
-
       </div>
 
-      <!-- Quick Back navigation pill -->
-      <button onclick="goToCardScene()" class="text-xs text-dustyRose/75 underline mt-2">
-        ← Back to greeting card
-      </button>
+      <!-- Quick Navigation back -->
+      <div class="flex items-center gap-4 mt-2">
+        <button onclick="goToEnvelopeScene()" class="text-xs text-dustyRose/75 underline">
+          ← Back to envelope
+        </button>
+        <button onclick="goToHomeScene()" class="text-xs text-roseGold underline">
+          Home Menu 🏠
+        </button>
+      </div>
 
     </section>
 
-    <!-- ================= SCENE 4: 21ST BIRTHDAY CAKE & CANDLE BLOWING RITUAL ================= -->
-    <section id="candleScene" class="w-full h-full hidden flex-col items-center justify-between py-3 text-center select-none overflow-y-auto custom-scroll">
+    <!-- ================= SCENE 5: 2-TIER CAKE & "21" CANDLE BLOW CEREMONY ================= -->
+    <section id="candleScene" class="w-full h-full hidden flex-col items-center justify-between py-2 text-center select-none overflow-y-auto custom-scroll">
       
-      <!-- Top Guided Wish Header -->
-      <div class="w-full max-w-sm px-2 pt-1 transition-all duration-500">
-        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-moodyPlum/90 border border-wineBorder text-[11px] font-semibold tracking-wider text-vibrantPink uppercase mb-2 shadow-inner">
-          <span id="candleBadgeIcon">✨</span>
-          <span id="candleBadge">A 21st Wish Ritual</span>
-        </div>
-        <h2 id="candlePromptTitle" class="font-serif text-2xl sm:text-3xl font-bold text-softBlush leading-snug tracking-wide">
-          Close your eyes, <br/>
-          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush">make your 21st wish...</span>
-        </h2>
-        <p id="candlePromptSubtitle" class="font-sans text-[11px] text-dustyRose/80 mt-1 max-w-xs mx-auto leading-relaxed">
-          Hold that wish in your heart. When you're ready, blow gently into your phone's microphone!
+      <!-- Top header bar with home button -->
+      <div class="w-full flex items-center justify-between px-2 pt-1 mb-1">
+        <button onclick="goToHomeScene()" class="text-xs px-3 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition flex items-center gap-1">
+          <span>←</span>
+          <span>Home Menu</span>
+        </button>
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-amber-300">Chapter 21 • The Wish</span>
+      </div>
+
+      <!-- Guided Wish Header -->
+      <div class="mb-1">
+        <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-moodyPlum/90 border border-wineBorder text-[10px] text-roseGold uppercase tracking-widest font-semibold">
+          <span>✨</span>
+          <span>The Birthday Ritual</span>
+        </span>
+        <h3 id="candleInstruction" class="font-serif text-2xl sm:text-3xl font-bold text-softBlush mt-1 leading-snug">
+          Close your eyes, make a wish, <br/>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-roseGold to-vibrantPink">then blow into your mic</span>
+        </h3>
+        <p class="font-sans text-[11px] text-dustyRose/80 mt-0.5">
+          Blow directly into the bottom microphone of your phone 🌬️
         </p>
       </div>
 
-      <!-- Grand Luxury 2-Tier Birthday Cake Container -->
-      <div class="relative w-full max-w-[320px] flex flex-col items-center justify-end my-auto py-2">
-        
-        <!-- Warm ambient candle glow on backdrop -->
-        <div id="candleAmbientGlow" class="absolute top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-amber-400/15 rounded-full blur-3xl pointer-events-none transition-opacity duration-700"></div>
+      <!-- Real-time Sustained Breath Meter -->
+      <div class="w-full max-w-[240px] flex flex-col items-center my-1">
+        <div class="w-full flex justify-between text-[10px] text-roseGold/70 font-mono mb-1">
+          <span id="blowStatusText">Blow progress</span>
+          <span id="blowPercentText">0%</span>
+        </div>
+        <div class="w-full h-2 rounded-full bg-moodyPlum border border-wineBorder overflow-hidden p-0.5 shadow-inner">
+          <div id="micMeterBar" class="h-full w-0 rounded-full bg-gradient-to-r from-amber-400 via-vibrantPink to-rose-400 transition-all duration-75"></div>
+        </div>
+      </div>
 
-        <!-- ================= THE "2" & "1" CANDLES ================= -->
-        <div class="relative z-30 flex items-end justify-center gap-6 mb-[-6px]">
+      <!-- 2-TIER CAKE & "21" CANDLES DISPLAY STAGE -->
+      <div class="relative w-64 h-64 flex flex-col items-center justify-end my-auto select-none">
+        
+        <!-- ================= NUMBER 21 CANDLES ROW ================= -->
+        <div class="relative z-30 flex items-end justify-center space-x-6 mb-[-12px]">
           
           <!-- CANDLE "2" -->
           <div class="relative flex flex-col items-center">
-            <!-- Smoke Container 1 -->
-            <div id="smokeBox1" class="absolute -top-10 left-1/2 -translate-x-1/2 w-10 h-10 pointer-events-none"></div>
-
-            <!-- Candle Flame 1 -->
-            <div class="relative w-5 h-9 flex items-center justify-center mb-1">
-              <div id="flame1" class="flame-active w-4 h-7 rounded-full bg-gradient-to-t from-rose-500 via-amber-300 to-white shadow-[0_0_16px_rgba(251,191,36,0.95)] transition-all duration-300">
-                <!-- Inner white flame core -->
-                <div class="w-1.5 h-3.5 mx-auto mt-2 bg-white/90 rounded-full blur-[0.5px]"></div>
-              </div>
+            <!-- Flame 2 -->
+            <div id="flame2" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer" onclick="extinguishManual()">
+              <!-- Outer Glow -->
+              <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
+              <!-- Flame Outer -->
+              <div class="w-4 h-7 bg-gradient-to-t from-rose-500 via-amber-400 to-yellow-100 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.9)]"></div>
+              <!-- Flame Inner Blue Core -->
+              <div class="absolute bottom-0 w-2 h-3 bg-blue-300 rounded-full opacity-80"></div>
             </div>
-
+            <!-- Smoke placeholder -->
+            <div id="smoke2" class="absolute top-0"></div>
             <!-- Candle Wick -->
-            <div class="w-0.5 h-2 bg-stone-300/80 mb-0.5"></div>
-
-            <!-- Number "2" Sculpted Candle Body -->
-            <div class="w-11 h-14 rounded-xl bg-gradient-to-b from-[#ED9DB2] via-[#C97288] to-[#6E2238] border border-roseGold/70 shadow-[0_4px_12px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center font-serif text-2xl font-bold text-softBlush/95 italic drop-shadow">
-              2
+            <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
+            <!-- Sculpted Number "2" Candle Body -->
+            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center">
+              <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">2</span>
             </div>
-            <!-- Candle base wax puddle into cake -->
-            <div class="w-7 h-1.5 bg-[#4A1728] rounded-full blur-[0.5px] -mt-0.5"></div>
           </div>
 
           <!-- CANDLE "1" -->
           <div class="relative flex flex-col items-center">
-            <!-- Smoke Container 2 -->
-            <div id="smokeBox2" class="absolute -top-10 left-1/2 -translate-x-1/2 w-10 h-10 pointer-events-none"></div>
-
-            <!-- Candle Flame 2 -->
-            <div class="relative w-5 h-9 flex items-center justify-center mb-1">
-              <div id="flame2" class="flame-active w-4 h-7 rounded-full bg-gradient-to-t from-rose-500 via-amber-300 to-white shadow-[0_0_16px_rgba(251,191,36,0.95)] transition-all duration-300">
-                <!-- Inner white flame core -->
-                <div class="w-1.5 h-3.5 mx-auto mt-2 bg-white/90 rounded-full blur-[0.5px]"></div>
-              </div>
+            <!-- Flame 1 -->
+            <div id="flame1" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer" onclick="extinguishManual()">
+              <!-- Outer Glow -->
+              <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
+              <!-- Flame Outer -->
+              <div class="w-4 h-7 bg-gradient-to-t from-rose-500 via-amber-400 to-yellow-100 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.9)]"></div>
+              <!-- Flame Inner Blue Core -->
+              <div class="absolute bottom-0 w-2 h-3 bg-blue-300 rounded-full opacity-80"></div>
             </div>
-
+            <!-- Smoke placeholder -->
+            <div id="smoke1" class="absolute top-0"></div>
             <!-- Candle Wick -->
-            <div class="w-0.5 h-2 bg-stone-300/80 mb-0.5"></div>
-
-            <!-- Number "1" Sculpted Candle Body -->
-            <div class="w-11 h-14 rounded-xl bg-gradient-to-b from-[#ED9DB2] via-[#C97288] to-[#6E2238] border border-roseGold/70 shadow-[0_4px_12px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.4)] flex items-center justify-center font-serif text-2xl font-bold text-softBlush/95 italic drop-shadow">
-              1
+            <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
+            <!-- Sculpted Number "1" Candle Body -->
+            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center">
+              <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">1</span>
             </div>
-            <!-- Candle base wax puddle into cake -->
-            <div class="w-7 h-1.5 bg-[#4A1728] rounded-full blur-[0.5px] -mt-0.5"></div>
           </div>
 
         </div>
 
-        <!-- ================= THE CAKE BODY ================= -->
-        <!-- Cake Top Tier -->
-        <div class="relative z-20 w-44 h-16 rounded-2xl bg-gradient-to-b from-[#331728] via-[#26101E] to-[#1A0A14] border border-roseGold/40 shadow-[0_8px_20px_rgba(0,0,0,0.7)] flex flex-col justify-between overflow-hidden">
+        <!-- ================= 2-TIER DELUXE MATURE PINK CAKE ================= -->
+        <div class="relative z-20 flex flex-col items-center">
           
-          <!-- Dripping Rose Frosting Layer -->
-          <div class="w-full h-4 bg-gradient-to-r from-[#B84B6B] via-[#E28CA4] to-[#B84B6B] flex items-center justify-around px-2 shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne/90 shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne/90 shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne/90 shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne/90 shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-champagne/90 shadow-sm"></span>
+          <!-- TOP CAKE TIER -->
+          <div class="relative w-36 h-14 rounded-2xl bg-gradient-to-b from-[#4A1D2B] via-[#33111C] to-[#200A11] border-2 border-rose-300/40 shadow-[0_8px_20px_rgba(0,0,0,0.7)] flex items-center justify-center overflow-hidden">
+            <!-- Dripping strawberry cream scallops -->
+            <div class="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-rose-400 to-rose-300 opacity-90 rounded-b-xl border-b border-white/30 flex justify-around">
+              <span class="w-2 h-3 bg-rose-300 rounded-b-full"></span>
+              <span class="w-2.5 h-4 bg-rose-300 rounded-b-full"></span>
+              <span class="w-2 h-2.5 bg-rose-300 rounded-b-full"></span>
+              <span class="w-3 h-4 bg-rose-300 rounded-b-full"></span>
+              <span class="w-2 h-3 bg-rose-300 rounded-b-full"></span>
+            </div>
+            <!-- Frosting piping dots -->
+            <div class="absolute bottom-1 inset-x-2 flex justify-between text-[8px] text-amber-200/70">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
           </div>
 
-          <!-- Mid Cake Ribbon -->
-          <div class="flex items-center justify-center py-1">
-            <span class="text-[9px] uppercase tracking-[0.3em] font-medium text-roseGold/80 font-serif">✦ Lovey ✦</span>
+          <!-- BOTTOM CAKE TIER -->
+          <div class="relative w-52 h-18 -mt-2 rounded-3xl bg-gradient-to-b from-[#3D1421] via-[#2A0B15] to-[#17050B] border-2 border-wineBorder shadow-[0_15px_35px_rgba(0,0,0,0.9)] flex items-center justify-center overflow-hidden">
+            <!-- Dripping glaze band -->
+            <div class="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-rose-400/90 to-rose-300/80 rounded-b-2xl flex justify-around">
+              <span class="w-3 h-3 bg-rose-300 rounded-b-full"></span>
+              <span class="w-3.5 h-5 bg-rose-300 rounded-b-full"></span>
+              <span class="w-2.5 h-3 bg-rose-300 rounded-b-full"></span>
+              <span class="w-4 h-5.5 bg-rose-300 rounded-b-full"></span>
+              <span class="w-3 h-3.5 bg-rose-300 rounded-b-full"></span>
+            </div>
+            <!-- Gold ribbon border around bottom tier -->
+            <div class="w-full h-2 bg-gradient-to-r from-amber-300/40 via-amber-200/80 to-amber-300/40 shadow-sm mt-3"></div>
           </div>
 
-          <!-- Bottom piped cream border -->
-          <div class="w-full h-1.5 bg-gradient-to-r from-[#591C31] via-[#A83E5D] to-[#591C31] border-t border-roseGold/20"></div>
-        </div>
-
-        <!-- Cake Bottom Tier -->
-        <div class="relative z-10 w-64 h-20 -mt-2 rounded-2xl bg-gradient-to-b from-[#291220] via-[#1F0D18] to-[#140710] border border-wineBorder shadow-[0_12px_30px_rgba(0,0,0,0.85)] flex flex-col justify-between overflow-hidden">
-          
-          <!-- Dripping Strawberry Cream Scallop -->
-          <div class="w-full h-4 bg-gradient-to-r from-[#872944] via-[#C96B85] to-[#872944] flex items-center justify-around px-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-softBlush shadow-sm"></span>
-          </div>
-
-          <!-- Decorative Gold Stars on Base Tier -->
-          <div class="flex items-center justify-center gap-3 text-roseGold/40 text-[10px]">
-            <span>✦</span>
-            <span class="font-serif italic text-xs text-roseGold/70">Chapter 21</span>
-            <span>✦</span>
-          </div>
-
-          <!-- Cake Base Border -->
-          <div class="w-full h-2 bg-gradient-to-r from-[#471526] via-[#7D2943] to-[#471526] border-t border-roseGold/20"></div>
-        </div>
-
-        <!-- Metallic Mirrored Cake Stand -->
-        <div class="relative z-0 w-72 h-4 rounded-full bg-gradient-to-r from-[#3D2534] via-roseGold/60 to-[#3D2534] border border-roseGold/50 shadow-[0_10px_25px_rgba(0,0,0,0.9)] -mt-1 flex items-center justify-center">
-          <div class="w-48 h-1 bg-white/30 rounded-full blur-[0.5px]"></div>
+          <!-- LUXURY CAKE PEDESTAL STAND -->
+          <div class="w-60 h-4 rounded-full bg-gradient-to-r from-roseGold/60 via-champagne to-roseGold/60 border border-white/40 shadow-xl -mt-1 z-10"></div>
+          <div class="w-28 h-3 rounded-b-xl bg-gradient-to-b from-[#2B1720] to-[#12080D] border-x border-b border-wineBorder shadow-md"></div>
         </div>
 
       </div>
 
-      <!-- ================= INTERACTIVE BLOW & MIC CONTROLS ================= -->
-      <div id="candleControls" class="w-full max-w-sm px-4 flex flex-col items-center transition-opacity duration-500">
-        
-        <!-- Live Microphone Visualizer Meter -->
-        <div class="w-full bg-moodyPlum/80 border border-wineBorder rounded-2xl p-3 shadow-glassPill flex flex-col items-center mb-3">
-          <div class="flex items-center justify-between w-full text-xs text-dustyRose font-medium mb-1.5">
-            <span id="micStatusIcon">🎙️</span>
-            <span id="micStatusText">Blow into your mic to extinguish!</span>
-            <span>🌬️</span>
-          </div>
-          <!-- Blow intensity bar -->
-          <div class="w-full h-2 rounded-full bg-velvet border border-wineBorder/60 overflow-hidden">
-            <div id="micLevelMeter" class="h-full w-0 bg-gradient-to-r from-dustyRose via-vibrantPink to-amber-300 rounded-full transition-all duration-75"></div>
-          </div>
-        </div>
-
-        <!-- Fallback Manual Blow Button -->
-        <button onclick="extinguishCandles('manual')" class="group relative px-6 py-2.5 rounded-full bg-velvet/80 border border-wineBorder text-roseGold text-xs font-semibold tracking-wider hover:bg-moodyPlum active:scale-95 transition flex items-center gap-2">
+      <!-- Fallback Tap Button for Blowing Candles -->
+      <div class="flex flex-col items-center gap-2 mb-1">
+        <button id="manualBlowBtn" onclick="extinguishManual()" class="px-5 py-2 rounded-full bg-moodyPlum/90 border border-wineBorder text-roseGold text-xs font-semibold tracking-wide active:scale-95 transition shadow-glassPill flex items-center gap-1.5">
           <span>Blow Candles Gently</span>
-          <span class="text-sm">🌬️</span>
+          <span>🌬️</span>
         </button>
-
+        <span class="text-[10px] text-dustyRose/60">If mic permission is off, tap the button above or tap the flames!</span>
       </div>
 
-      <!-- ================= WISH REVEALED CARD (SHOWN AFTER BLOWING OUT) ================= -->
-      <div id="wishRevealedCard" class="hidden w-full max-w-sm bg-[#1A0E17]/95 backdrop-blur-2xl border border-vibrantPink/40 rounded-3xl p-5 shadow-roseCard flex-col items-center animate-breath my-auto">
-        <span class="text-3xl mb-1">✨ 🎂 ✨</span>
-        <h3 class="font-serif text-xl font-bold text-softBlush">Wish Whispered, Heard by the Stars</h3>
-        <p class="font-sans text-xs text-roseGold/90 leading-relaxed mt-2 text-center px-1">
-          May every single wish you held in your heart while closing your eyes find its gentle way to you this year. May 21 be your sweetest, warmest, and most unforgettable chapter yet.
+      <!-- CELEBRATORY WISH CARD (Appears upon blow out) -->
+      <div id="wishRevealedCard" class="hidden w-full max-w-sm bg-velvet/90 backdrop-blur-xl border border-wineBorder rounded-3xl p-4 shadow-roseCard flex-col items-center text-center my-2 transition-all duration-700">
+        <span class="text-2xl mb-1">🌟</span>
+        <h4 class="font-serif text-xl font-bold text-softBlush">
+          "May Your 21st Year Be Everything You Hope For"
+        </h4>
+        <p class="font-sans text-xs text-roseGold/90 mt-1.5 leading-relaxed">
+          May every single wish you held in your heart while blowing those candles come true, lovey ko. I'll always be in your corner celebrating your light.
         </p>
 
-        <!-- Relight Candles & Navigation Buttons -->
-        <div class="flex items-center gap-3 mt-4 w-full">
-          <button onclick="relightCandles()" class="flex-1 py-2.5 rounded-xl bg-moodyPlum border border-wineBorder text-roseGold text-xs font-semibold active:scale-95 transition">
+        <div class="flex items-center gap-2 mt-4 w-full">
+          <button onclick="relightCandles()" class="flex-1 py-2 rounded-xl bg-moodyPlum border border-wineBorder text-roseGold text-xs font-semibold active:scale-95 transition">
             Relight 🕯️
           </button>
-          <button onclick="goToLetterScene()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#A83253] to-vibrantPink text-softBlush text-xs font-semibold active:scale-95 transition shadow-pinkGlow">
-            Back to Letter 📜
+          <button onclick="goToGiftScene()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-rose-700 to-vibrantPink text-softBlush text-xs font-semibold active:scale-95 transition shadow-pinkGlow">
+            Open Gift 🎁
+          </button>
+          <button onclick="goToHomeScene()" class="px-3 py-2 rounded-xl bg-moodyPlum border border-wineBorder text-roseGold text-xs active:scale-95 transition">
+            🏠
           </button>
         </div>
       </div>
 
-      <!-- Bottom Navigation Back to Letter -->
-      <button onclick="goToLetterScene()" class="text-xs text-dustyRose/75 underline mt-2 mb-1">
-        ← Back to letter
-      </button>
+    </section>
 
+    <!-- ================= SCENE 6: MATURE GIFT BOX & ALLURING CAROUSEL ================= -->
+    <section id="giftScene" class="w-full h-full hidden flex-col items-center justify-between py-2 text-center select-none overflow-y-auto custom-scroll">
+      
+      <!-- Top header bar with home button -->
+      <div class="w-full flex items-center justify-between px-2 pt-1 mb-1">
+        <button onclick="goToHomeScene()" class="text-xs px-3 py-1 rounded-full bg-moodyPlum text-roseGold/80 border border-wineBorder active:scale-95 transition flex items-center gap-1">
+          <span>←</span>
+          <span>Home Menu</span>
+        </button>
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-rose-400">Chapter 21 • Seductive Elegance</span>
+      </div>
+
+      <!-- Gift Stage Area (Before Unboxing) -->
+      <div id="giftBoxStage" class="w-full max-w-sm flex flex-col items-center justify-center my-auto py-2">
+        <div class="mb-4">
+          <div class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-rose-950/60 border border-rose-800/40 text-[10px] text-rose-300 uppercase tracking-widest font-semibold mb-1 shadow-inner">
+            <span>🔒</span>
+            <span>Handle with care</span>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-softBlush tracking-wide leading-tight">
+            A Gift Wrapped in <br/>
+            <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-vibrantPink to-amber-200">Pure Allure</span>
+          </h2>
+          <p class="font-sans text-[11px] text-dustyRose/80 mt-1 max-w-xs mx-auto">
+            You know how tempting you are, lovey. Tap the ribbon to reveal what's locked inside.
+          </p>
+        </div>
+
+        <!-- 3D Gift Box Interactive Component -->
+        <div id="giftBoxInteractive" onclick="openGiftBox()" class="group relative w-64 h-64 flex items-center justify-center cursor-pointer active:scale-95 transition-transform duration-300 select-none my-2">
+          
+          <!-- Ambient Glow behind Box -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-rose-600/30 to-vibrantPink/20 blur-2xl rounded-full scale-90 pointer-events-none group-hover:scale-110 transition-transform duration-500"></div>
+
+          <!-- The Gift Lid -->
+          <div id="giftLid" class="absolute top-9 z-30 w-52 h-14 rounded-2xl bg-gradient-to-b from-[#4A1426] via-[#330D1A] to-[#240812] border-2 border-rose-400/50 shadow-[0_12px_30px_rgba(0,0,0,0.85)] flex items-center justify-center transition-all duration-300">
+            <!-- Ribbon Band on Lid -->
+            <div class="w-10 h-full bg-gradient-to-r from-rose-400 via-rose-300 to-rose-400 shadow-sm border-x border-amber-200/50"></div>
+            
+            <!-- Deluxe Satin Bow -->
+            <div id="giftBow" class="absolute -top-7 left-1/2 -translate-x-1/2 flex items-center justify-center">
+              <div id="bowLoopLeft" class="w-8 h-8 rounded-full border-[3.5px] border-rose-300 bg-rose-500/80 -rotate-45 shadow-lg -mr-1"></div>
+              <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-rose-400 to-amber-200 z-10 shadow-md border border-white/60 flex items-center justify-center text-[9px]">✨</div>
+              <div id="bowLoopRight" class="w-8 h-8 rounded-full border-[3.5px] border-rose-300 bg-rose-500/80 rotate-45 shadow-lg -ml-1"></div>
+            </div>
+          </div>
+
+          <!-- The Gift Body -->
+          <div class="absolute bottom-10 z-20 w-48 h-40 rounded-2xl bg-gradient-to-b from-[#2B0B17] via-[#1F0711] to-[#120409] border-2 border-wineBorder shadow-[0_20px_40px_rgba(0,0,0,0.9)] flex items-center justify-center overflow-hidden">
+            <!-- Vertical Ribbon -->
+            <div class="w-10 h-full bg-gradient-to-r from-rose-400 via-rose-300 to-rose-400 border-x border-amber-200/50 shadow-md"></div>
+            <!-- Horizontal Ribbon -->
+            <div class="absolute inset-x-0 h-10 bg-gradient-to-b from-rose-400 via-rose-300 to-rose-400 border-y border-amber-200/50 shadow-md"></div>
+            
+            <!-- Tag on the box -->
+            <div class="absolute bottom-3 right-3 bg-velvet/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-rose-400/40 shadow-sm text-[9px] font-mono text-rose-300 flex items-center gap-1">
+              <span>🔥</span>
+              <span>CONFIDENTIAL</span>
+            </div>
+          </div>
+
+          <!-- Ground shadow -->
+          <div class="absolute bottom-4 w-44 h-5 rounded-full bg-black/80 blur-md pointer-events-none"></div>
+        </div>
+
+        <!-- Tap trigger prompt -->
+        <p class="text-xs font-medium tracking-wide text-rose-300/90 flex items-center justify-center gap-1.5 mt-2 animate-pulse">
+          <span>✦</span>
+          <span>Tap the present box to unwrap</span>
+          <span>✦</span>
+        </p>
+      </div>
+
+      <!-- Spicy Photo Carousel Stage (Revealed on Open) -->
+      <div id="giftCarouselStage" class="hidden w-full max-w-sm flex-col items-center justify-between my-auto py-1">
+        
+        <!-- Header text above carousel -->
+        <div class="mb-2">
+          <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-rose-950/80 border border-rose-700/50 text-[10px] text-rose-300 uppercase tracking-widest font-semibold">
+            <span>🔥</span>
+            <span>Burned in my memory</span>
+          </span>
+          <h3 class="font-serif text-2xl font-bold text-softBlush mt-1">
+            "Your Beauty Has Me Wrapped"
+          </h3>
+          <p class="font-sans text-[11px] text-dustyRose/80">From your sweetest smiles to the ones that leave me weak.</p>
+        </div>
+
+        <!-- Carousel Frame Container -->
+        <div class="relative w-full max-w-[310px] rounded-3xl bg-gradient-to-b from-[#2B0E1E] to-[#16060F] p-3 border border-rose-500/40 carousel-glow flex flex-col items-center">
+          
+          <!-- Image Slide Window -->
+          <div class="relative w-full h-[330px] rounded-2xl overflow-hidden bg-black/60 border border-wineBorder/60 shadow-inner flex items-center justify-center">
+            
+            <!-- Single Active Slide Element -->
+            <img id="carouselImage" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80" alt="Special Memory" class="w-full h-full object-cover transition-all duration-500 transform">
+
+            <!-- Gradient Dark Vignette Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#14060E] via-transparent to-transparent pointer-events-none"></div>
+
+            <!-- Slide Badge Top Right -->
+            <div class="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-rose-400/40 text-[9px] font-mono text-rose-300">
+              <span id="slideIndexText">1 / 3</span>
+            </div>
+
+            <!-- Left & Right Arrow Touch Controls -->
+            <button onclick="prevPhoto()" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-softBlush flex items-center justify-center active:scale-90 transition" aria-label="Previous Slide">
+              ‹
+            </button>
+            <button onclick="nextPhoto()" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-softBlush flex items-center justify-center active:scale-90 transition" aria-label="Next Slide">
+              ›
+            </button>
+
+            <!-- Bottom Caption Inside Slide -->
+            <div class="absolute bottom-2.5 inset-x-3 text-left">
+              <span id="slideTag" class="text-[9px] font-semibold tracking-wider text-rose-400 uppercase font-sans">✦ The Mirror Pic</span>
+              <p id="slideCaption" class="font-serif text-sm italic text-softBlush font-medium leading-snug drop-shadow-md mt-0.5">
+                "That picture is burned in my memory na... your so hot lovey (wanna wrap you in my arms)."
+              </p>
+            </div>
+          </div>
+
+          <!-- Dot Indicators -->
+          <div class="flex items-center gap-1.5 mt-2.5" id="carouselDots">
+            <span class="w-2 h-2 rounded-full bg-rose-400 transition-all"></span>
+            <span class="w-2 h-2 rounded-full bg-moodyPlum border border-wineBorder transition-all"></span>
+            <span class="w-2 h-2 rounded-full bg-moodyPlum border border-wineBorder transition-all"></span>
+          </div>
+
+          <!-- Spicy Reactions Tray -->
+          <div class="w-full pt-2.5 mt-2 border-t border-wineBorder/60 flex items-center justify-between">
+            <span class="text-[10px] text-dustyRose font-medium">Send her reactions:</span>
+            <div class="flex items-center space-x-2">
+              <button onclick="spawnKiss('🔥', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🔥</button>
+              <button onclick="spawnKiss('🥵', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🥵</button>
+              <button onclick="spawnKiss('💋', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">💋</button>
+              <button onclick="spawnKiss('🖤', event)" class="w-8 h-8 rounded-lg bg-moodyPlum border border-wineBorder flex items-center justify-center text-sm active:scale-125 transition">🖤</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action options below carousel -->
+        <div class="flex items-center gap-2 mt-3 w-full max-w-[310px]">
+          <button onclick="rewrapGift()" class="flex-1 py-2 rounded-xl bg-moodyPlum border border-wineBorder text-roseGold text-xs font-semibold active:scale-95 transition">
+            Re-wrap Box 🎁
+          </button>
+          <button onclick="goToHomeScene()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-rose-700 to-vibrantPink text-softBlush text-xs font-semibold active:scale-95 transition shadow-pinkGlow">
+            Home Hub 🏠
+          </button>
+        </div>
+
+      </div>
+
+      <button onclick="goToHomeScene()" class="text-xs text-dustyRose/75 underline mt-2 mb-1">
+        ← Back to Main Menu
+      </button>
     </section>
 
   </main>
@@ -734,7 +988,6 @@
   <script>
     let audioCtx = null;
     let soundEnabled = true;
-    const bgMusic = document.getElementById('bgMusic');
 
     function getAudioContext() {
       if (!audioCtx) {
@@ -750,12 +1003,14 @@
     function toggleSound() {
       soundEnabled = !soundEnabled;
       const icon = document.getElementById('soundIcon');
+      const bgMusic = document.getElementById('bgMusic');
+      
       if (soundEnabled) {
         icon.innerText = '🔔';
+        playTone(659.25, 0.25);
         if (bgMusic && bgMusic.paused) {
           bgMusic.play().catch(() => {});
         }
-        playTone(659.25, 0.25);
       } else {
         icon.innerText = '🔕';
         if (bgMusic) {
@@ -783,34 +1038,28 @@
           osc.start();
           osc.stop(ctx.currentTime + duration);
         }, delay * 1000);
-      } catch (e) {
-        // Audio guard
-      }
+      } catch (e) {}
     }
 
-    // Word transition chime sequence
     function playWordChime(index) {
-      const frequencies = [392.00, 440.00, 523.25, 659.25]; // G4 -> A4 -> C5 -> E5
+      const frequencies = [392.00, 440.00, 523.25, 659.25];
       playTone(frequencies[index] || 523.25, 0.45, 0, 'sine', 0.14);
     }
 
-    // Wax seal unfold harp arpeggio
     function playUnfoldMelody() {
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, i) => {
         playTone(freq, 0.35, i * 0.08, 'sine', 0.12);
       });
     }
 
-    // Kiss/Reaction gentle pop
     function playPopTone() {
       const notes = [698.46, 783.99, 880.00];
       const f = notes[Math.floor(Math.random() * notes.length)];
       playTone(f, 0.15, 0, 'triangle', 0.1);
     }
 
-    // Breath / Blow whoosh sound synthesis
-    function playBlowSound() {
+    function playExtinguishSound() {
       if (!soundEnabled) return;
       try {
         const ctx = getAudioContext();
@@ -818,7 +1067,7 @@
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.12));
+          data[i] = Math.random() * 2 - 1;
         }
 
         const noise = ctx.createBufferSource();
@@ -826,20 +1075,19 @@
 
         const filter = ctx.createBiquadFilter();
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(450, ctx.currentTime);
-        filter.frequency.linearRampToValueAtTime(120, ctx.currentTime + 0.35);
+        filter.frequency.setValueAtTime(400, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.4);
 
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.38);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
 
         noise.connect(filter);
         filter.connect(gain);
         gain.connect(ctx.destination);
+
         noise.start();
-      } catch (e) {
-        // Safe guard
-      }
+      } catch(e) {}
     }
   </script>
 
@@ -911,24 +1159,8 @@
   </script>
 
   <script>
-    const introPhrase = "For someone who lights up every room just by being in it...";
-    let typeIndex = 0;
-    const typewriterEl = document.getElementById('typewriterText');
-    const gateActionArea = document.getElementById('gateActionArea');
-
-    function startTypewriter() {
-      if (typeIndex < introPhrase.length) {
-        typewriterEl.textContent += introPhrase.charAt(typeIndex);
-        typeIndex++;
-        setTimeout(startTypewriter, 50);
-      } else {
-        // Reveal button once typing concludes
-        gateActionArea.style.opacity = '1';
-      }
-    }
-
     function transitionToScene(targetSceneId) {
-      const scenes = ['gateScene', 'introScene', 'cardScene', 'letterScene', 'candleScene'];
+      const scenes = ['gateScene', 'introScene', 'homeScene', 'cardScene', 'letterScene', 'candleScene', 'giftScene'];
       scenes.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -944,23 +1176,219 @@
       }
     }
 
-    function startExperience() {
-      // 1. Play real background music stream on user interaction
-      if (bgMusic && soundEnabled) {
-        bgMusic.volume = 0.55;
+    function goToHomeScene() {
+      stopMicListening();
+      playTone(440, 0.2);
+      transitionToScene('homeScene');
+    }
+
+    function goToEnvelopeScene() {
+      playTone(523.25, 0.2);
+      stopMicListening();
+      transitionToScene('cardScene');
+    }
+
+    function goToCandleScene() {
+      playTone(587.33, 0.25);
+      transitionToScene('candleScene');
+      startMicListening();
+    }
+
+    function goToGiftScene() {
+      playTone(698.46, 0.25);
+      stopMicListening();
+      transitionToScene('giftScene');
+    }
+
+    /* ================= GIFT BOX & SPICY CAROUSEL LOGIC ================= */
+    let isGiftOpening = false;
+    let currentSlide = 0;
+
+    const spicyPhotos = [
+      {
+        url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80",
+        tag: "✦ The Mirror Pic",
+        caption: "That picture is burned in my memory na... your so hot lovey (wanna wrap you in my arms)."
+      },
+      {
+        url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
+        tag: "✦ Pure Temptation",
+        caption: "Your lips look so tempting po and your cheeks makes me want to spoil you ng kisses."
+      },
+      {
+        url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&auto=format&fit=crop&q=80",
+        tag: "✦ With & Without Makeup",
+        caption: "So cute and undeniably gorgeous, every single version of you."
+      }
+    ];
+
+    function openGiftBox() {
+      if (isGiftOpening) return;
+      isGiftOpening = true;
+
+      playTone(440.00, 0.2, 0, 'triangle', 0.15);
+      playTone(554.37, 0.25, 0.08, 'triangle', 0.15);
+      playTone(659.25, 0.35, 0.16, 'sine', 0.18);
+      playTone(880.00, 0.45, 0.24, 'sine', 0.2);
+
+      const bowLeft = document.getElementById('bowLoopLeft');
+      const bowRight = document.getElementById('bowLoopRight');
+      const lid = document.getElementById('giftLid');
+
+      if (bowLeft) bowLeft.classList.add('ribbon-fly-l');
+      if (bowRight) bowRight.classList.add('ribbon-fly-r');
+      if (lid) lid.classList.add('lid-popped');
+
+      confetti({
+        particleCount: 65,
+        spread: 85,
+        origin: { y: 0.55 },
+        colors: ['#F43F5E', '#FB7185', '#F472B6', '#F7E7CE', '#FFE4E6']
+      });
+
+      setTimeout(() => {
+        const boxStage = document.getElementById('giftBoxStage');
+        const carouselStage = document.getElementById('giftCarouselStage');
+        if (boxStage) boxStage.classList.add('hidden');
+        if (carouselStage) {
+          carouselStage.classList.remove('hidden');
+          carouselStage.classList.add('flex');
+        }
+        updateCarouselDisplay();
+        isGiftOpening = false;
+      }, 950);
+    }
+
+    function rewrapGift() {
+      const boxStage = document.getElementById('giftBoxStage');
+      const carouselStage = document.getElementById('giftCarouselStage');
+      const bowLeft = document.getElementById('bowLoopLeft');
+      const bowRight = document.getElementById('bowLoopRight');
+      const lid = document.getElementById('giftLid');
+
+      if (carouselStage) {
+        carouselStage.classList.add('hidden');
+        carouselStage.classList.remove('flex');
+      }
+      if (boxStage) boxStage.classList.remove('hidden');
+
+      if (bowLeft) bowLeft.classList.remove('ribbon-fly-l');
+      if (bowRight) bowRight.classList.remove('ribbon-fly-r');
+      if (lid) lid.classList.remove('lid-popped');
+
+      currentSlide = 0;
+      playTone(440, 0.2);
+    }
+
+    function updateCarouselDisplay() {
+      const img = document.getElementById('carouselImage');
+      const tag = document.getElementById('slideTag');
+      const caption = document.getElementById('slideCaption');
+      const indexText = document.getElementById('slideIndexText');
+      const dotsContainer = document.getElementById('carouselDots');
+
+      const data = spicyPhotos[currentSlide];
+      if (!data) return;
+
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = data.url;
+          img.style.opacity = '1';
+        }, 150);
+      }
+      if (tag) tag.innerText = data.tag;
+      if (caption) caption.innerText = data.caption;
+      if (indexText) indexText.innerText = `${currentSlide + 1} / ${spicyPhotos.length}`;
+
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        spicyPhotos.forEach((_, i) => {
+          const dot = document.createElement('span');
+          if (i === currentSlide) {
+            dot.className = 'w-4 h-2 rounded-full bg-rose-400 transition-all';
+          } else {
+            dot.className = 'w-2 h-2 rounded-full bg-moodyPlum border border-wineBorder transition-all';
+          }
+          dotsContainer.appendChild(dot);
+        });
+      }
+    }
+
+    function nextPhoto() {
+      currentSlide = (currentSlide + 1) % spicyPhotos.length;
+      playPopTone();
+      updateCarouselDisplay();
+    }
+
+    function prevPhoto() {
+      currentSlide = (currentSlide - 1 + spicyPhotos.length) % spicyPhotos.length;
+      playPopTone();
+      updateCarouselDisplay();
+    }
+
+    let isEnvelopeOpening = false;
+    function openLetterFromEnvelope() {
+      if (isEnvelopeOpening) return;
+      isEnvelopeOpening = true;
+
+      const container = document.getElementById('envelopeContainer');
+      const seal = document.getElementById('waxSealButton');
+
+      playTone(523.25, 0.2);
+      if (seal) seal.style.transform = 'translate(-50%, -50%) scale(1.25) rotate(15deg)';
+
+      setTimeout(() => {
+        if (container) container.classList.add('envelope-open');
+        playUnfoldMelody();
+        confetti({
+          particleCount: 40,
+          spread: 60,
+          origin: { y: 0.6 },
+          colors: ['#F472B6', '#C98293', '#DDA7A5', '#F7E7CE']
+        });
+      }, 200);
+
+      setTimeout(() => {
+        transitionToScene('letterScene');
+        if (container) container.classList.remove('envelope-open');
+        if (seal) seal.style.transform = 'translate(-50%, -50%) scale(1)';
+        isEnvelopeOpening = false;
+      }, 1250);
+    }
+  </script>
+
+  <script>
+    const typewriterQuote = "For someone who lights up every room just by being in it...";
+    let typeIndex = 0;
+    const typewriterTarget = document.getElementById('gateTypewriterText');
+    const startBtn = document.getElementById('gateStartBtn');
+
+    function runTypewriter() {
+      if (typeIndex < typewriterQuote.length) {
+        typewriterTarget.innerHTML += typewriterQuote.charAt(typeIndex);
+        typeIndex++;
+        setTimeout(runTypewriter, 45);
+      } else {
+        if (startBtn) {
+          startBtn.classList.remove('opacity-0', 'pointer-events-none');
+          startBtn.classList.add('opacity-100');
+        }
+      }
+    }
+
+    function unlockAudioAndStartIntro() {
+      getAudioContext();
+      playTone(523.25, 0.3);
+
+      const bgMusic = document.getElementById('bgMusic');
+      if (bgMusic) {
+        bgMusic.volume = 0.5;
         bgMusic.play().catch(() => {});
       }
 
-      // 2. Initialize Web Audio Context
-      getAudioContext();
-
-      // 3. Transition to Word Flash Scene
       transitionToScene('introScene');
-
-      // 4. Start the "Happy" -> "Birthday" -> "To" -> "You" sequence
-      setTimeout(() => {
-        playIntroSequence();
-      }, 300);
+      setTimeout(playIntroSequence, 400);
     }
 
     const words = ["Happy", "Birthday", "To", "You"];
@@ -978,20 +1406,20 @@
       if (sequenceStarted) return;
       sequenceStarted = true;
 
-      introHint.style.opacity = '0';
-      skipBtn.style.opacity = '1';
+      getAudioContext();
+
+      if (introHint) introHint.style.opacity = '0';
+      if (skipBtn) skipBtn.style.opacity = '1';
 
       function showNextWord() {
         if (wordIndex < words.length) {
           const currentWord = words[wordIndex];
           flashElement.innerText = currentWord;
 
-          // Remove & re-trigger animation class
           flashElement.classList.remove('word-flash');
-          void flashElement.offsetWidth; // Force reflow
+          void flashElement.offsetWidth;
           flashElement.classList.add('word-flash');
 
-          // Audio tone cue
           playWordChime(wordIndex);
 
           wordIndex++;
@@ -1009,186 +1437,82 @@
       sequenceFinished = true;
       clearTimeout(wordTimer);
 
-      flashElement.innerText = "✨";
-      flashElement.className = "font-serif text-5xl text-vibrantPink animate-bounce";
-      introPostscript.style.opacity = '1';
+      if (flashElement) {
+        flashElement.innerText = "✨";
+        flashElement.className = "font-serif text-5xl text-vibrantPink animate-bounce";
+      }
+      if (introPostscript) introPostscript.style.opacity = '1';
 
-      // Delicate confetti spray
       confetti({
-        particleCount: 45,
-        spread: 70,
+        particleCount: 50,
+        spread: 75,
         origin: { y: 0.5 },
         colors: ['#F472B6', '#C98293', '#DDA7A5', '#F7E7CE']
       });
 
-      // Transition to Card Scene smoothly
       setTimeout(() => {
-        transitionToScene('cardScene');
+        transitionToScene('homeScene');
       }, 1200);
     }
 
-    function skipToCard(e) {
+    function triggerImmediateIntro() {
+      if (!sequenceStarted) {
+        playIntroSequence();
+      }
+    }
+
+    function skipToHome(e) {
       if (e) e.stopPropagation();
       clearTimeout(wordTimer);
-      transitionToScene('cardScene');
+      finishIntroSequence();
     }
+  </script>
 
-    let isEnvelopeOpening = false;
-
-    function triggerEnvelopeOpen() {
-      if (isEnvelopeOpening) return;
-      isEnvelopeOpening = true;
-
-      // 1. Play wax seal break melody & chimes
-      playUnfoldMelody();
-
-      // 2. Confetti sparkle burst right at the wax seal
-      confetti({
-        particleCount: 50,
-        spread: 65,
-        origin: { y: 0.55 },
-        colors: ['#F472B6', '#C98293', '#DDA7A5', '#F7E7CE']
-      });
-
-      // 3. Pop & fade wax seal
-      const seal = document.getElementById('waxSealWrapper');
-      if (seal) {
-        seal.style.transition = 'transform 0.4s ease, opacity 0.35s ease';
-        seal.style.transform = 'translate(-50%, -10px) scale(1.25)';
-        seal.style.opacity = '0';
-      }
-
-      // 4. Flip open the triangular top flap in 3D
-      const flap = document.getElementById('envelopeFlap');
-      if (flap) {
-        flap.classList.add('flap-open');
-      }
-
-      // 5. Slide letter upward out of the envelope pocket
-      setTimeout(() => {
-        const letter = document.getElementById('envelopeLetterPeek');
-        if (letter) {
-          letter.classList.add('letter-popped');
-        }
-      }, 400);
-
-      // 6. Fade envelope container smoothly and transition to full reading sheet
-      setTimeout(() => {
-        transitionToScene('letterScene');
-        // Reset envelope state for potential replay
-        isEnvelopeOpening = false;
-        if (seal) {
-          seal.style.transform = 'translate(-50%, 0) scale(1)';
-          seal.style.opacity = '1';
-        }
-        if (flap) {
-          flap.classList.remove('flap-open');
-        }
-        const letter = document.getElementById('envelopeLetterPeek');
-        if (letter) {
-          letter.classList.remove('letter-popped');
-        }
-      }, 1450);
-    }
-
-    function openLetterScene() {
-      triggerEnvelopeOpen();
-    }
-
-    function goToCardScene() {
-      playTone(523.25, 0.2);
-      stopMicListening();
-      transitionToScene('cardScene');
-    }
-
-    function goToLetterScene() {
-      playTone(523.25, 0.2);
-      stopMicListening();
-      transitionToScene('letterScene');
-    }
-
-    function goToCandleScene() {
-      playTone(587.33, 0.25);
-      transitionToScene('candleScene');
-      // Automatically request and start microphone blow detection
-      startMicListening();
-    }
-
-    // ================= CANDLE & MICROPHONE BLOW LOGIC =================
+  <script>
     let micStream = null;
-    let micAnalyser = null;
+    let micSource = null;
+    let analyserNode = null;
     let micAnimationId = null;
-    let candlesExtinguished = false;
+    let candlesBlown = false;
+
+    let blowProgress = 0;
+    const BLOW_TARGET = 100;
+    let baselineNoise = 10;
+    let isCalibrating = true;
+    let calibrationFrames = 0;
 
     async function startMicListening() {
-      if (candlesExtinguished) return;
-      const statusText = document.getElementById('micStatusText');
-      const statusIcon = document.getElementById('micStatusIcon');
-      const levelMeter = document.getElementById('micLevelMeter');
+      if (candlesBlown) return;
 
       try {
-        const ctx = getAudioContext();
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          if (statusText) statusText.innerText = "Tap 'Blow Candles Gently' below";
-          return;
-        }
-
-        micStream = await navigator.mediaDevices.getUserMedia({
+        const stream = await navigator.mediaDevices.getUserMedia({ 
           audio: {
             echoCancellation: false,
             noiseSuppression: false,
             autoGainControl: false
-          }
+          } 
         });
 
-        const source = ctx.createMediaStreamSource(micStream);
-        micAnalyser = ctx.createAnalyser();
-        micAnalyser.fftSize = 256;
-        source.connect(micAnalyser);
+        micStream = stream;
+        const ctx = getAudioContext();
+        micSource = ctx.createMediaStreamSource(stream);
+        analyserNode = ctx.createAnalyser();
+        analyserNode.fftSize = 512;
+        analyserNode.smoothingTimeConstant = 0.25;
 
-        const bufferLength = micAnalyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
+        micSource.connect(analyserNode);
 
-        if (statusText) statusText.innerText = "Blow into your mic to extinguish! 🌬️";
-        if (statusIcon) statusIcon.innerText = "🎙️";
+        isCalibrating = true;
+        calibrationFrames = 0;
+        baselineNoise = 10;
+        blowProgress = 0;
 
-        let consecutiveHighFrames = 0;
-
-        function checkAudioLevel() {
-          if (candlesExtinguished) return;
-
-          micAnalyser.getByteFrequencyData(dataArray);
-          let sum = 0;
-          for (let i = 0; i < bufferLength; i++) {
-            sum += dataArray[i];
-          }
-          const average = sum / bufferLength;
-
-          // Update UI visualizer bar
-          if (levelMeter) {
-            const meterPct = Math.min(100, (average / 70) * 100);
-            levelMeter.style.width = `${meterPct}%`;
-          }
-
-          // Blowing into a mobile mic causes high-amplitude turbulent broadband noise
-          if (average > 48) {
-            consecutiveHighFrames++;
-            if (consecutiveHighFrames >= 3) {
-              extinguishCandles('mic');
-              return;
-            }
-          } else {
-            consecutiveHighFrames = Math.max(0, consecutiveHighFrames - 1);
-          }
-
-          micAnimationId = requestAnimationFrame(checkAudioLevel);
-        }
-
-        checkAudioLevel();
+        detectBlowingLoop();
       } catch (err) {
-        // If microphone access is denied, gently inform the user to use the tap button
-        if (statusText) statusText.innerText = "Mic paused • Tap 'Blow Candles' 🌬️";
-        if (statusIcon) statusIcon.innerText = "✨";
+        const hint = document.getElementById('candleInstruction');
+        if (hint) {
+          hint.innerHTML = 'Close your eyes, make a wish, <br/><span class="text-amber-200">and tap "Blow Candles Gently" below 🎂</span>';
+        }
       }
     }
 
@@ -1198,129 +1522,189 @@
         micAnimationId = null;
       }
       if (micStream) {
-        micStream.getTracks().forEach(track => track.stop());
+        micStream.getTracks().forEach(t => t.stop());
         micStream = null;
       }
-      const levelMeter = document.getElementById('micLevelMeter');
-      if (levelMeter) levelMeter.style.width = '0%';
     }
 
-    function spawnSmoke(boxId) {
-      const box = document.getElementById(boxId);
-      if (!box) return;
-      for (let i = 0; i < 7; i++) {
-        const p = document.createElement('div');
-        p.className = 'smoke-particle';
-        const sx = (Math.random() - 0.5) * 35;
-        p.style.setProperty('--sx', `${sx}px`);
-        p.style.left = `${12 + (Math.random() - 0.5) * 10}px`;
-        p.style.top = '10px';
-        box.appendChild(p);
-        setTimeout(() => p.remove(), 1200);
+    function detectBlowingLoop() {
+      if (candlesBlown || !analyserNode) return;
+
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyserNode.getByteFrequencyData(dataArray);
+
+      let lowFreqSum = 0;
+      const lowBinLimit = 12;
+      for (let i = 1; i <= lowBinLimit; i++) {
+        lowFreqSum += dataArray[i];
+      }
+      const lowFreqAvg = lowFreqSum / lowBinLimit;
+
+      if (isCalibrating) {
+        calibrationFrames++;
+        baselineNoise = (baselineNoise * 0.9) + (lowFreqAvg * 0.1);
+        if (calibrationFrames > 25) {
+          isCalibrating = false;
+        }
+      } else {
+        const blowThreshold = Math.max(baselineNoise * 1.5, 110);
+        const isBlowingNow = lowFreqAvg > blowThreshold;
+
+        if (isBlowingNow) {
+          blowProgress += 3.5;
+          flickerFlamesFromBreath(true);
+        } else {
+          blowProgress = Math.max(0, blowProgress - 2.0);
+          flickerFlamesFromBreath(false);
+        }
+
+        const clampedPercent = Math.min(100, Math.round((blowProgress / BLOW_TARGET) * 100));
+        updateBlowMeterUI(clampedPercent, isBlowingNow);
+
+        if (blowProgress >= BLOW_TARGET) {
+          triggerCandleExtinguish();
+          return;
+        }
+      }
+
+      micAnimationId = requestAnimationFrame(detectBlowingLoop);
+    }
+
+    function updateBlowMeterUI(percent, isBlowing) {
+      const meterBar = document.getElementById('micMeterBar');
+      const percentText = document.getElementById('blowPercentText');
+      const statusText = document.getElementById('blowStatusText');
+
+      if (meterBar) meterBar.style.width = `${percent}%`;
+      if (percentText) percentText.innerText = `${percent}%`;
+
+      if (statusText) {
+        if (percent > 10) {
+          statusText.innerText = "Keep blowing! 🌬️";
+          statusText.classList.add('text-amber-300');
+        } else {
+          statusText.innerText = "Blow progress";
+          statusText.classList.remove('text-amber-300');
+        }
       }
     }
 
-    function extinguishCandles(source = 'manual') {
-      if (candlesExtinguished) return;
-      candlesExtinguished = true;
+    function flickerFlamesFromBreath(isBlowing) {
+      const f1 = document.getElementById('flame1');
+      const f2 = document.getElementById('flame2');
+      if (!f1 || !f2) return;
 
-      // Stop mic processing
+      if (isBlowing) {
+        const jitter = (Math.random() - 0.5) * 20;
+        const scale = 0.7 + Math.random() * 0.3;
+        f1.style.transform = `scale(${scale}) skewX(${jitter}deg)`;
+        f2.style.transform = `scale(${scale}) skewX(${-jitter}deg)`;
+      } else {
+        f1.style.transform = '';
+        f2.style.transform = '';
+      }
+    }
+
+    function extinguishManual() {
+      if (candlesBlown) return;
+      blowProgress = 100;
+      updateBlowMeterUI(100, true);
+      triggerCandleExtinguish();
+    }
+
+    function triggerCandleExtinguish() {
+      candlesBlown = true;
       stopMicListening();
 
-      // Play soft blow whoosh + smoke
-      playBlowSound();
-      spawnSmoke('smokeBox1');
-      spawnSmoke('smokeBox2');
+      playExtinguishSound();
 
-      // Extinguish the flames visually
-      const flame1 = document.getElementById('flame1');
-      const flame2 = document.getElementById('flame2');
-      const ambientGlow = document.getElementById('candleAmbientGlow');
+      const f1 = document.getElementById('flame1');
+      const f2 = document.getElementById('flame2');
+      if (f1) f1.className = 'flame-extinguished';
+      if (f2) f2.className = 'flame-extinguished';
 
-      if (flame1) flame1.className = 'flame-extinguished w-4 h-7 rounded-full bg-amber-300';
-      if (flame2) flame2.className = 'flame-extinguished w-4 h-7 rounded-full bg-amber-300';
-      if (ambientGlow) ambientGlow.style.opacity = '0';
+      spawnSmokeParticle('smoke1');
+      spawnSmokeParticle('smoke2');
 
-      // Confetti burst for birthday celebration
+      const meterBar = document.getElementById('micMeterBar');
+      const percentText = document.getElementById('blowPercentText');
+      const statusText = document.getElementById('blowStatusText');
+      if (meterBar) meterBar.style.width = `100%`;
+      if (percentText) percentText.innerText = `100%`;
+      if (statusText) statusText.innerText = `Extinguished! ✨`;
+
+      playMelodicCelebration();
+
       confetti({
-        particleCount: 65,
-        spread: 80,
-        origin: { y: 0.55 },
-        colors: ['#F472B6', '#C98293', '#DDA7A5', '#F7E7CE', '#FBBF24']
+        particleCount: 75,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#F59E0B', '#F472B6', '#F7E7CE', '#FCE7ED']
       });
 
-      // Celebratory chime sequence
       setTimeout(() => {
-        playTone(523.25, 0.3, 0, 'sine', 0.15); // C5
-        playTone(659.25, 0.3, 0.12, 'sine', 0.15); // E5
-        playTone(783.99, 0.3, 0.24, 'sine', 0.15); // G5
-        playTone(1046.50, 0.5, 0.36, 'sine', 0.18); // C6
-      }, 350);
-
-      // Fade out the guidance and reveal the sweet message
-      setTimeout(() => {
-        const controls = document.getElementById('candleControls');
-        const promptTitle = document.getElementById('candlePromptTitle');
-        const promptSubtitle = document.getElementById('candlePromptSubtitle');
-        const candleBadge = document.getElementById('candleBadge');
         const wishCard = document.getElementById('wishRevealedCard');
-
-        if (controls) controls.classList.add('hidden');
-        if (promptTitle) promptTitle.innerHTML = "Wishes Whispered, <br/><span class='italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink to-softBlush'>Heard by the Stars ✨</span>";
-        if (promptSubtitle) promptSubtitle.innerText = "Here's to the brightest, sweetest year ahead of you.";
-        if (candleBadge) candleBadge.innerText = "Wish Fulfilled ✦";
-
         if (wishCard) {
           wishCard.classList.remove('hidden');
           wishCard.classList.add('flex');
         }
-      }, 850);
+      }, 700);
+    }
+
+    function spawnSmokeParticle(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => {
+          const puff = document.createElement('div');
+          puff.className = 'smoke-particle';
+          puff.style.left = `${(Math.random() - 0.5) * 14}px`;
+          container.appendChild(puff);
+          setTimeout(() => puff.remove(), 1300);
+        }, i * 160);
+      }
     }
 
     function relightCandles() {
-      candlesExtinguished = false;
+      candlesBlown = false;
       blowProgress = 0;
-      baselineSampleCount = 0;
+      updateBlowMeterUI(0, false);
 
-      const flame1 = document.getElementById('flame1');
-      const flame2 = document.getElementById('flame2');
-      const ambientGlow = document.getElementById('candleAmbientGlow');
-      const controls = document.getElementById('candleControls');
+      const f1 = document.getElementById('flame1');
+      const f2 = document.getElementById('flame2');
+      if (f1) {
+        f1.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer';
+        f1.style.transform = '';
+      }
+      if (f2) {
+        f2.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer';
+        f2.style.transform = '';
+      }
+
       const wishCard = document.getElementById('wishRevealedCard');
-      const promptTitle = document.getElementById('candlePromptTitle');
-      const promptSubtitle = document.getElementById('candlePromptSubtitle');
-      const candleBadge = document.getElementById('candleBadge');
-      const levelMeter = document.getElementById('micLevelMeter');
-      const blowPctText = document.getElementById('blowPctText');
-
-      if (levelMeter) levelMeter.style.width = '0%';
-      if (blowPctText) blowPctText.innerText = 'Steady breath needed';
-
-      if (flame1) {
-        flame1.className = 'flame-active w-4 h-7 rounded-full bg-gradient-to-t from-rose-500 via-amber-300 to-white shadow-[0_0_15px_rgba(251,191,36,0.9)] transition-all duration-300';
-        flame1.style.transform = 'scale(1) skewX(0deg) translateY(0)';
-      }
-      if (flame2) {
-        flame2.className = 'flame-active w-4 h-7 rounded-full bg-gradient-to-t from-rose-500 via-amber-300 to-white shadow-[0_0_15px_rgba(251,191,36,0.9)] transition-all duration-300';
-        flame2.style.transform = 'scale(1) skewX(0deg) translateY(0)';
-      }
-      if (ambientGlow) ambientGlow.style.opacity = '1';
-
       if (wishCard) {
         wishCard.classList.add('hidden');
         wishCard.classList.remove('flex');
       }
-      if (controls) controls.classList.remove('hidden');
 
-      if (promptTitle) promptTitle.innerHTML = "Close your eyes, <br/><span class='italic text-transparent bg-clip-text bg-gradient-to-r from-vibrantPink via-roseGold to-softBlush'>make your 21st wish...</span>";
-      if (promptSubtitle) promptSubtitle.innerText = "Hold that wish in your heart. When you're ready, open your eyes and blow onto your phone's microphone!";
-      if (candleBadge) candleBadge.innerText = "A 21st Wish Ritual";
-
-      playTone(659.25, 0.25);
+      playTone(523.25, 0.2);
       startMicListening();
     }
 
-    // Touch Reactions & Floating Kiss generator
+    function playMelodicCelebration() {
+      const fanfare = [
+        { f: 523.25, d: 0.2, t: 0 },
+        { f: 659.25, d: 0.2, t: 0.15 },
+        { f: 783.99, d: 0.25, t: 0.3 },
+        { f: 1046.5, d: 0.6, t: 0.45 }
+      ];
+      fanfare.forEach(note => {
+        playTone(note.f, note.d, note.t, 'triangle', 0.16);
+      });
+    }
+
     function spawnKiss(symbol, event) {
       playPopTone();
       const rect = event.target.getBoundingClientRect();
@@ -1348,13 +1732,11 @@
       bubble.style.setProperty('--rot', `${rot}deg`);
 
       pool.appendChild(bubble);
-
       setTimeout(() => bubble.remove(), 2200);
     }
 
-    // Kickstart typewriter intro on load
     window.addEventListener('load', () => {
-      setTimeout(startTypewriter, 500);
+      runTypewriter();
     });
   </script>
 </body>
