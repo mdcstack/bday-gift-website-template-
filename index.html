@@ -378,8 +378,8 @@
           </div>
 
           <div class="mt-3 pt-2 border-t border-wineBorder/50 flex items-center justify-between text-[10px] text-roseGold/70">
-            <span>Uses mic breath detection</span>
-            <span class="text-amber-300 font-semibold">Blow Candles 🌬️</span>
+            <span>Tap each candle to extinguish</span>
+            <span class="text-amber-300 font-semibold">Make a Wish 🕯️</span>
           </div>
         </div>
 
@@ -633,10 +633,8 @@
           <span>←</span>
           <span>Home Menu</span>
         </button>
-        
       </div>
 
-      <!-- Guided Wish Header -->
       <div class="mb-1">
         <span class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-moodyPlum/90 border border-wineBorder text-[10px] text-roseGold uppercase tracking-widest font-semibold">
           <span>✨</span>
@@ -644,22 +642,65 @@
         </span>
         <h3 id="candleInstruction" class="font-serif text-2xl sm:text-3xl font-bold text-softBlush mt-1 leading-snug">
           Close your eyes, make a wish, <br/>
-          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-roseGold to-vibrantPink">then blow into your mic</span>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-roseGold to-vibrantPink">then blow into your mic to extinguish</span>
         </h3>
         <p class="font-sans text-[11px] text-dustyRose/80 mt-0.5">
-          Blow directly into the bottom microphone of your phone 🌬️
+          Blow sustained breath on your phone's microphone or tap the candles ✨
         </p>
       </div>
 
-      <!-- Real-time Sustained Breath Meter -->
-      <div class="w-full max-w-[240px] flex flex-col items-center my-1">
-        <div class="w-full flex justify-between text-[10px] text-roseGold/70 font-mono mb-1">
-          <span id="blowStatusText">Blow progress</span>
-          <span id="blowPercentText">0%</span>
+      <!-- Interactive Blow Progress Meter & Target Limit Indicator -->
+      <div class="w-full max-w-[310px] bg-velvet/85 backdrop-blur-md rounded-2xl p-2.5 border border-wineBorder/80 shadow-md flex flex-col items-center gap-1.5 my-1">
+        
+        <!-- Top Status Bar (Mic state & Candles counter) -->
+        <div class="w-full flex items-center justify-between text-[10px] font-mono px-1">
+          <div id="micStatusText" class="flex items-center gap-1 text-roseGold/90">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span>Mic Ready</span>
+          </div>
+          <span id="candlesRemainingText" class="text-amber-200/90 font-semibold">
+            2 of 2 burning 🕯️
+          </span>
         </div>
-        <div class="w-full h-2 rounded-full bg-moodyPlum border border-wineBorder overflow-hidden p-0.5 shadow-inner">
-          <div id="micMeterBar" class="h-full w-0 rounded-full bg-gradient-to-r from-amber-400 via-vibrantPink to-rose-400 transition-all duration-75"></div>
+
+        <!-- The Blow Progress Gauge with Target Limit Indicator -->
+        <div class="relative w-full">
+          <!-- Background track -->
+          <div class="relative w-full h-4 bg-noir/90 rounded-full border border-wineBorder/90 overflow-hidden shadow-inner flex items-center">
+            <!-- Dynamic Progress Fill Bar -->
+            <div id="blowProgressBar" class="h-full w-0 bg-gradient-to-r from-[#9E1B48] via-[#F43F5E] to-[#FBBF24] transition-[width] duration-100 ease-out shadow-[0_0_12px_rgba(244,63,94,0.7)]"></div>
+          </div>
+
+          <!-- Target Limit Indicator Line (at 100% target goal) -->
+          <div class="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-20">
+            <div class="w-1.5 h-6 bg-amber-300 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.9)] border border-noir"></div>
+          </div>
         </div>
+
+        <!-- Metric Labels: Current Power vs Extinguish Limit Goal -->
+        <div class="w-full flex items-center justify-between text-[9px] font-mono tracking-wider text-dustyRose/90 px-1">
+          <div class="flex items-center gap-1">
+            <span>Blow Power:</span>
+            <span id="blowPercentText" class="text-vibrantPink font-bold">0%</span>
+          </div>
+          <div class="flex items-center gap-1 text-amber-300 font-semibold">
+            <span>Limit to Extinguish: 100%</span>
+            <span>🎯</span>
+          </div>
+        </div>
+
+        <!-- Quick Mic Trigger & Fallback Manual Blow Button -->
+        <div class="w-full flex items-center gap-1.5 pt-1 border-t border-wineBorder/40">
+          <button id="micToggleBtn" onclick="toggleMicrophoneBlow()" class="flex-1 py-1 px-2 rounded-lg bg-moodyPlum hover:bg-moodyPlum/80 border border-roseGold/30 text-[10px] text-softBlush font-medium flex items-center justify-center gap-1 active:scale-95 transition">
+            <span id="micToggleIcon">🎙️</span>
+            <span id="micToggleLabel">Start Mic</span>
+          </button>
+          <button onclick="extinguishBothCandles()" class="flex-1 py-1 px-2 rounded-lg bg-gradient-to-r from-[#80223B] to-[#591427] border border-roseGold/40 text-[10px] text-softBlush font-medium flex items-center justify-center gap-1 active:scale-95 transition shadow-sm">
+            <span>🌬️</span>
+            <span>Tap to Blow</span>
+          </button>
+        </div>
+
       </div>
 
       <!-- 2-TIER CAKE & "21" CANDLES DISPLAY STAGE -->
@@ -668,10 +709,9 @@
         <!-- ================= NUMBER 21 CANDLES ROW ================= -->
         <div class="relative z-30 flex items-end justify-center space-x-6 mb-[-12px]">
           
-          <!-- CANDLE "2" -->
-          <div class="relative flex flex-col items-center">
+          <div class="relative flex flex-col items-center cursor-pointer group active:scale-95 transition-transform" onclick="extinguishCandle(2)">
             <!-- Flame 2 -->
-            <div id="flame2" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer" onclick="extinguishManual()">
+            <div id="flame2" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center">
               <!-- Outer Glow -->
               <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
               <!-- Flame Outer -->
@@ -684,15 +724,14 @@
             <!-- Candle Wick -->
             <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
             <!-- Sculpted Number "2" Candle Body -->
-            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center">
+            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center group-hover:border-amber-200 transition-colors">
               <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">2</span>
             </div>
           </div>
 
-          <!-- CANDLE "1" -->
-          <div class="relative flex flex-col items-center">
+          <div class="relative flex flex-col items-center cursor-pointer group active:scale-95 transition-transform" onclick="extinguishCandle(1)">
             <!-- Flame 1 -->
-            <div id="flame1" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer" onclick="extinguishManual()">
+            <div id="flame1" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center">
               <!-- Outer Glow -->
               <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
               <!-- Flame Outer -->
@@ -705,7 +744,7 @@
             <!-- Candle Wick -->
             <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
             <!-- Sculpted Number "1" Candle Body -->
-            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center">
+            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center group-hover:border-amber-200 transition-colors">
               <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">1</span>
             </div>
           </div>
@@ -752,13 +791,12 @@
 
       </div>
 
-      <!-- Fallback Tap Button for Blowing Candles -->
-      <div class="flex flex-col items-center gap-2 mb-1">
-        <button id="manualBlowBtn" onclick="extinguishManual()" class="px-5 py-2 rounded-full bg-moodyPlum/90 border border-wineBorder text-roseGold text-xs font-semibold tracking-wide active:scale-95 transition shadow-glassPill flex items-center gap-1.5">
-          <span>Blow Candles Gently</span>
-          <span>🌬️</span>
-        </button>
-        <span class="text-[10px] text-dustyRose/60">If mic permission is off, tap the button above or tap the flames!</span>
+      <div class="flex flex-col items-center gap-1 mb-1">
+        <span class="text-xs text-roseGold/80 flex items-center gap-1.5 animate-pulse">
+          <span>✦</span>
+          <span>Tap each number to blow out its flame</span>
+          <span>✦</span>
+        </span>
       </div>
 
       <!-- CELEBRATORY WISH CARD (Appears upon blow out) -->
@@ -1130,26 +1168,31 @@
     }
 
     function goToHomeScene() {
-      stopMicListening();
+      stopMicrophone();
       playTone(440, 0.2);
       transitionToScene('homeScene');
     }
 
     function goToEnvelopeScene() {
+      stopMicrophone();
       playTone(523.25, 0.2);
-      stopMicListening();
       transitionToScene('cardScene');
     }
 
     function goToCandleScene() {
       playTone(587.33, 0.25);
       transitionToScene('candleScene');
-      startMicListening();
+      // Automatically attempt mic activation when arriving at cake scene
+      setTimeout(() => {
+        if (!candle1Out || !candle2Out) {
+          startMicrophoneBlowDetection();
+        }
+      }, 350);
     }
 
     function goToGiftScene() {
+      stopMicrophone();
       playTone(698.46, 0.25);
-      stopMicListening();
       transitionToScene('giftScene');
     }
 
@@ -1422,178 +1465,227 @@
   </script>
 
   <script>
+    let candle1Out = false;
+    let candle2Out = false;
     let micStream = null;
-    let micSource = null;
-    let analyserNode = null;
-    let micAnimationId = null;
-    let candlesBlown = false;
-
+    let micAudioCtx = null;
+    let micAnalyser = null;
+    let micAnimFrame = null;
     let blowProgress = 0;
-    const BLOW_TARGET = 100;
-    let baselineNoise = 10;
-    let isCalibrating = true;
-    let calibrationFrames = 0;
+    let isListeningForBlow = false;
 
-    async function startMicListening() {
-      if (candlesBlown) return;
+    function toggleMicrophoneBlow() {
+      if (isListeningForBlow) {
+        stopMicrophone();
+      } else {
+        startMicrophoneBlowDetection();
+      }
+    }
+
+    async function startMicrophoneBlowDetection() {
+      if (candle1Out && candle2Out) return;
+
+      const micStatus = document.getElementById('micStatusText');
+      const micLabel = document.getElementById('micToggleLabel');
+      const micIcon = document.getElementById('micToggleIcon');
 
       try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          if (micStatus) micStatus.innerHTML = `<span class="text-amber-300">⚠️ Mic not supported</span>`;
+          return;
+        }
+
         const stream = await navigator.mediaDevices.getUserMedia({ 
-          audio: {
+          audio: { 
             echoCancellation: false,
             noiseSuppression: false,
-            autoGainControl: false
+            autoGainControl: false 
           } 
         });
 
         micStream = stream;
-        const ctx = getAudioContext();
-        micSource = ctx.createMediaStreamSource(stream);
-        analyserNode = ctx.createAnalyser();
-        analyserNode.fftSize = 512;
-        analyserNode.smoothingTimeConstant = 0.25;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        micAudioCtx = new AudioCtx();
+        const source = micAudioCtx.createMediaStreamSource(stream);
+        micAnalyser = micAudioCtx.createAnalyser();
+        micAnalyser.fftSize = 512;
+        micAnalyser.smoothingTimeConstant = 0.2;
+        source.connect(micAnalyser);
 
-        micSource.connect(analyserNode);
-
-        isCalibrating = true;
-        calibrationFrames = 0;
-        baselineNoise = 10;
-        blowProgress = 0;
-
-        detectBlowingLoop();
-      } catch (err) {
-        const hint = document.getElementById('candleInstruction');
-        if (hint) {
-          hint.innerHTML = 'Close your eyes, make a wish, <br/><span class="text-amber-200">and tap "Blow Candles Gently" below 🎂</span>';
+        isListeningForBlow = true;
+        if (micStatus) {
+          micStatus.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-emerald-300">Listening — Blow now!</span>
+          `;
         }
+        if (micLabel) micLabel.innerText = "Stop Mic";
+        if (micIcon) micIcon.innerText = "🛑";
+
+        analyzeBlowStream();
+      } catch (err) {
+        if (micStatus) {
+          micStatus.innerHTML = `<span class="text-amber-300">Mic blocked, tap to blow</span>`;
+        }
+        if (micLabel) micLabel.innerText = "Enable Mic";
+        if (micIcon) micIcon.innerText = "🎙️";
       }
     }
 
-    function stopMicListening() {
-      if (micAnimationId) {
-        cancelAnimationFrame(micAnimationId);
-        micAnimationId = null;
+    function analyzeBlowStream() {
+      if (!isListeningForBlow || !micAnalyser) return;
+
+      const bufferLength = micAnalyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      micAnalyser.getByteFrequencyData(dataArray);
+
+      // Low frequency turbulence analysis (0-250Hz) specific to direct wind rumble on mic
+      let lowEnergy = 0;
+      const lowRange = Math.min(16, bufferLength);
+      for (let i = 1; i < lowRange; i++) {
+        lowEnergy += dataArray[i];
       }
+      const avgLow = lowEnergy / lowRange;
+
+      // Higher vocal/music frequencies
+      let highEnergy = 0;
+      for (let i = lowRange; i < bufferLength; i++) {
+        highEnergy += dataArray[i];
+      }
+      const avgHigh = highEnergy / (bufferLength - lowRange);
+
+      // Distinguish physical breath turbulence on the phone mic
+      const isBlowing = (avgLow > 50 && (avgLow > avgHigh * 1.25 || avgLow > 80));
+
+      const flame1 = document.getElementById('flame1');
+      const flame2 = document.getElementById('flame2');
+      const progressBar = document.getElementById('blowProgressBar');
+      const percentText = document.getElementById('blowPercentText');
+      const micStatus = document.getElementById('micStatusText');
+
+      if (isBlowing && (!candle1Out || !candle2Out)) {
+        // Accumulate sustained breath progress smoothly
+        const increment = Math.min(12, Math.max(3, (avgLow / 12)));
+        blowProgress += increment;
+        if (blowProgress > 100) blowProgress = 100;
+
+        if (micStatus) {
+          micStatus.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-vibrantPink animate-ping"></span>
+            <span class="text-vibrantPink font-semibold">Blowing! Keep going!</span>
+          `;
+        }
+
+        // Wobble and shrink flames dynamically under breath force
+        const lean = (Math.random() - 0.5) * 26;
+        const scale = Math.max(0.3, 1 - (blowProgress / 125));
+        if (flame1 && !candle1Out) flame1.style.transform = `scale(${scale}) rotate(${lean}deg)`;
+        if (flame2 && !candle2Out) flame2.style.transform = `scale(${scale}) rotate(${lean}deg)`;
+      } else {
+        // Smooth decay if breath pauses
+        blowProgress -= 3.5;
+        if (blowProgress < 0) blowProgress = 0;
+
+        if (micStatus && isListeningForBlow) {
+          micStatus.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-emerald-300">Listening — Blow now!</span>
+          `;
+        }
+
+        if (flame1 && !candle1Out) flame1.style.transform = '';
+        if (flame2 && !candle2Out) flame2.style.transform = '';
+      }
+
+      // Update progress bar width and limit percentage readout
+      const displayPct = Math.round(blowProgress);
+      if (progressBar) progressBar.style.width = `${displayPct}%`;
+      if (percentText) percentText.innerText = `${displayPct}%`;
+
+      // Trigger extinguish upon reaching the 100% threshold limit
+      if (blowProgress >= 100) {
+        if (percentText) percentText.innerText = `100% — EXTIN処!`;
+        extinguishBothCandles();
+        return;
+      }
+
+      micAnimFrame = requestAnimationFrame(analyzeBlowStream);
+    }
+
+    function stopMicrophone() {
+      isListeningForBlow = false;
+      if (micAnimFrame) cancelAnimationFrame(micAnimFrame);
       if (micStream) {
-        micStream.getTracks().forEach(t => t.stop());
+        micStream.getTracks().forEach(track => track.stop());
         micStream = null;
       }
+      if (micAudioCtx && micAudioCtx.state !== 'closed') {
+        micAudioCtx.close().catch(() => {});
+        micAudioCtx = null;
+      }
+
+      const micLabel = document.getElementById('micToggleLabel');
+      const micIcon = document.getElementById('micToggleIcon');
+      const micStatus = document.getElementById('micStatusText');
+      if (micLabel) micLabel.innerText = "Start Mic";
+      if (micIcon) micIcon.innerText = "🎙️";
+      if (micStatus) {
+        micStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-stone-500"></span><span>Mic Off</span>`;
+      }
     }
 
-    function detectBlowingLoop() {
-      if (candlesBlown || !analyserNode) return;
+    function extinguishBothCandles() {
+      if (!candle1Out) extinguishCandle(1);
+      if (!candle2Out) extinguishCandle(2);
+      stopMicrophone();
+    }
 
-      const bufferLength = analyserNode.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-      analyserNode.getByteFrequencyData(dataArray);
-
-      let lowFreqSum = 0;
-      const lowBinLimit = 12;
-      for (let i = 1; i <= lowBinLimit; i++) {
-        lowFreqSum += dataArray[i];
+    function extinguishCandle(num) {
+      if (num === 1 && !candle1Out) {
+        candle1Out = true;
+        const f1 = document.getElementById('flame1');
+        if (f1) f1.className = 'flame-extinguished';
+        spawnSmokeParticle('smoke1');
+        playExtinguishSound();
+      } else if (num === 2 && !candle2Out) {
+        candle2Out = true;
+        const f2 = document.getElementById('flame2');
+        if (f2) f2.className = 'flame-extinguished';
+        spawnSmokeParticle('smoke2');
+        playExtinguishSound();
       }
-      const lowFreqAvg = lowFreqSum / lowBinLimit;
 
-      if (isCalibrating) {
-        calibrationFrames++;
-        baselineNoise = (baselineNoise * 0.9) + (lowFreqAvg * 0.1);
-        if (calibrationFrames > 25) {
-          isCalibrating = false;
-        }
+      updateCandleCountUI();
+
+      // Check if both candles have been extinguished
+      if (candle1Out && candle2Out) {
+        stopMicrophone();
+        triggerAllCandlesCelebration();
+      }
+    }
+
+    function updateCandleCountUI() {
+      const counter = document.getElementById('candlesRemainingText');
+      if (!counter) return;
+
+      const remaining = (!candle1Out ? 1 : 0) + (!candle2Out ? 1 : 0);
+      if (remaining === 2) {
+        counter.innerText = "2 of 2 burning 🕯️";
+      } else if (remaining === 1) {
+        counter.innerText = "1 candle remaining! ✨";
       } else {
-        const blowThreshold = Math.max(baselineNoise * 1.5, 110);
-        const isBlowingNow = lowFreqAvg > blowThreshold;
-
-        if (isBlowingNow) {
-          blowProgress += 3.5;
-          flickerFlamesFromBreath(true);
-        } else {
-          blowProgress = Math.max(0, blowProgress - 2.0);
-          flickerFlamesFromBreath(false);
-        }
-
-        const clampedPercent = Math.min(100, Math.round((blowProgress / BLOW_TARGET) * 100));
-        updateBlowMeterUI(clampedPercent, isBlowingNow);
-
-        if (blowProgress >= BLOW_TARGET) {
-          triggerCandleExtinguish();
-          return;
-        }
-      }
-
-      micAnimationId = requestAnimationFrame(detectBlowingLoop);
-    }
-
-    function updateBlowMeterUI(percent, isBlowing) {
-      const meterBar = document.getElementById('micMeterBar');
-      const percentText = document.getElementById('blowPercentText');
-      const statusText = document.getElementById('blowStatusText');
-
-      if (meterBar) meterBar.style.width = `${percent}%`;
-      if (percentText) percentText.innerText = `${percent}%`;
-
-      if (statusText) {
-        if (percent > 10) {
-          statusText.innerText = "Keep blowing! 🌬️";
-          statusText.classList.add('text-amber-300');
-        } else {
-          statusText.innerText = "Blow progress";
-          statusText.classList.remove('text-amber-300');
-        }
+        counter.innerText = "All extinguished! ✨";
       }
     }
 
-    function flickerFlamesFromBreath(isBlowing) {
-      const f1 = document.getElementById('flame1');
-      const f2 = document.getElementById('flame2');
-      if (!f1 || !f2) return;
-
-      if (isBlowing) {
-        const jitter = (Math.random() - 0.5) * 20;
-        const scale = 0.7 + Math.random() * 0.3;
-        f1.style.transform = `scale(${scale}) skewX(${jitter}deg)`;
-        f2.style.transform = `scale(${scale}) skewX(${-jitter}deg)`;
-      } else {
-        f1.style.transform = '';
-        f2.style.transform = '';
-      }
-    }
-
-    function extinguishManual() {
-      if (candlesBlown) return;
-      blowProgress = 100;
-      updateBlowMeterUI(100, true);
-      triggerCandleExtinguish();
-    }
-
-    function triggerCandleExtinguish() {
-      candlesBlown = true;
-      stopMicListening();
-
-      playExtinguishSound();
-
-      const f1 = document.getElementById('flame1');
-      const f2 = document.getElementById('flame2');
-      if (f1) f1.className = 'flame-extinguished';
-      if (f2) f2.className = 'flame-extinguished';
-
-      spawnSmokeParticle('smoke1');
-      spawnSmokeParticle('smoke2');
-
-      const meterBar = document.getElementById('micMeterBar');
-      const percentText = document.getElementById('blowPercentText');
-      const statusText = document.getElementById('blowStatusText');
-      if (meterBar) meterBar.style.width = `100%`;
-      if (percentText) percentText.innerText = `100%`;
-      if (statusText) statusText.innerText = `Extinguished! ✨`;
-
+    function triggerAllCandlesCelebration() {
       playMelodicCelebration();
 
       confetti({
-        particleCount: 75,
+        particleCount: 80,
         spread: 90,
         origin: { y: 0.6 },
-        colors: ['#F59E0B', '#F472B6', '#F7E7CE', '#FCE7ED']
+        colors: ['#F59E0B', '#F472B6', '#F7E7CE', '#FCE7ED', '#FB7185']
       });
 
       setTimeout(() => {
@@ -1602,7 +1694,7 @@
           wishCard.classList.remove('hidden');
           wishCard.classList.add('flex');
         }
-      }, 700);
+      }, 500);
     }
 
     function spawnSmokeParticle(containerId) {
@@ -1616,23 +1708,23 @@
           puff.style.left = `${(Math.random() - 0.5) * 14}px`;
           container.appendChild(puff);
           setTimeout(() => puff.remove(), 1300);
-        }, i * 160);
+        }, i * 140);
       }
     }
 
     function relightCandles() {
-      candlesBlown = false;
+      candle1Out = false;
+      candle2Out = false;
       blowProgress = 0;
-      updateBlowMeterUI(0, false);
 
       const f1 = document.getElementById('flame1');
       const f2 = document.getElementById('flame2');
       if (f1) {
-        f1.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer';
+        f1.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center';
         f1.style.transform = '';
       }
       if (f2) {
-        f2.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center cursor-pointer';
+        f2.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center';
         f2.style.transform = '';
       }
 
@@ -1642,8 +1734,16 @@
         wishCard.classList.remove('flex');
       }
 
+      const progressBar = document.getElementById('blowProgressBar');
+      const percentText = document.getElementById('blowPercentText');
+      if (progressBar) progressBar.style.width = '0%';
+      if (percentText) percentText.innerText = '0%';
+
+      updateCandleCountUI();
       playTone(523.25, 0.2);
-      startMicListening();
+
+      // Re-enable microphone detection on relight
+      startMicrophoneBlowDetection();
     }
 
     function playMelodicCelebration() {
