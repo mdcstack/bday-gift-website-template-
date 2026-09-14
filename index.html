@@ -260,13 +260,13 @@
   </audio>
 
   <!-- 2. Envelope & Birthday Letter Music -->
-  <audio id="musicLetter" loop preload="auto">
+  <audio id="musicLetter" preload="auto">
     <source src="Media/bgMusicLetterOpening.mp3" type="audio/mp3">
   </audio>
 
   <!-- 3. Candle & Cake Wish Ritual Music -->
   <audio id="musicCandle" loop preload="auto">
-    <source src="Media/bgMusicBlowingCandle.mp3" type="audio/mp3">
+    <source src="https://cdn.pixabay.com/download/audio/2022/11/06/audio_03d2e61623.mp3?filename=warm-memories-124974.mp3" type="audio/mp3">
   </audio>
 
   <!-- 4. Seductive Gift Box & Spicy Carousel Music -->
@@ -475,7 +475,7 @@
                 <span class="text-[9px] text-roseGold/70 font-mono">21st Chapter</span>
               </div>
               <p class="text-[10px] text-softBlush/85 leading-relaxed font-sans line-clamp-3">
-                "Meeting you was quite unexpected, I didnt foresee na we would enjoy each others company to the point na we went from lm to ig..."
+                "Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig..."
               </p>
             </div>
             <span class="text-[9px] text-dustyRose/70 italic text-right">Unfolding letter...</span>
@@ -975,6 +975,20 @@
     const GIFT_LOOP_LIMIT = 60; // Stops exactly at the 1-minute (60s) mark of the track
     const GIFT_FADE_START = GIFT_LOOP_LIMIT - 3.5; // Start fading out ~3.5s before the 1-minute mark (56.5s)
 
+    const LETTER_START_TIME = 25; // Starts at 25 seconds into the track and loops back to 25s
+
+    // Monitor letter background music to loop back to the 25-second mark once finished
+    const musicLetterAudio = document.getElementById('musicLetter');
+    if (musicLetterAudio) {
+      musicLetterAudio.removeAttribute('loop'); // Remove native loop to prevent rewind to 0s
+      musicLetterAudio.addEventListener('ended', function () {
+        this.currentTime = LETTER_START_TIME;
+        if (soundEnabled && currentPlayingMusic === this) {
+          this.play().catch(() => {});
+        }
+      });
+    }
+
     // Monitor gift background music to fade out before 1-minute mark and loop cleanly back to 17s
     const musicGiftAudio = document.getElementById('musicGift');
     if (musicGiftAudio) {
@@ -1077,6 +1091,8 @@
       if (newAudio.id === 'musicGift') {
         newAudio.currentTime = GIFT_START_TIME;
         isGiftLoopFading = false;
+      } else if (newAudio.id === 'musicLetter') {
+        newAudio.currentTime = LETTER_START_TIME;
       }
       const playPromise = newAudio.play();
       if (playPromise !== undefined) {
