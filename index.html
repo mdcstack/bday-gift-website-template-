@@ -253,9 +253,25 @@
   <!-- Ambient Light Orb in Background -->
   <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-vibrantPink/10 rounded-full blur-[95px] pointer-events-none z-0 animate-breath"></div>
 
-  <!-- Hidden background audio player (plays warm acoustic piano) -->
-  <audio id="bgMusic" loop preload="auto">
+  <!-- Dedicated Background Music Players for each section -->
+  <!-- 1. Landing & Home Hub Music -->
+  <audio id="musicLanding" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- 2. Envelope & Birthday Letter Music -->
+  <audio id="musicLetter" loop preload="auto">
+    <source src="Media/bgMusicLetterOpening.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- 3. Candle & Cake Wish Ritual Music -->
+  <audio id="musicCandle" loop preload="auto">
+    <source src="Media/bgMusicBlowingCandle.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- 4. Seductive Gift Box & Spicy Carousel Music -->
+  <audio id="musicGift" loop preload="auto">
+    <source src="Media/bgMusicGiftOpening.mp3" type="audio/mp3">
   </audio>
 
   <!-- Header Bar -->
@@ -459,7 +475,7 @@
                 <span class="text-[9px] text-roseGold/70 font-mono">21st Chapter</span>
               </div>
               <p class="text-[10px] text-softBlush/85 leading-relaxed font-sans line-clamp-3">
-                "Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig..."
+                "Meeting you was quite unexpected, I didnt foresee na we would enjoy each others company to the point na we went from lm to ig..."
               </p>
             </div>
             <span class="text-[9px] text-dustyRose/70 italic text-right">Unfolding letter...</span>
@@ -642,140 +658,122 @@
         </span>
         <h3 id="candleInstruction" class="font-serif text-2xl sm:text-3xl font-bold text-softBlush mt-1 leading-snug">
           Close your eyes, make a wish, <br/>
-          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-roseGold to-vibrantPink">then blow into your mic to extinguish</span>
+          <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-softBlush via-roseGold to-vibrantPink">then tap each candle to blow it out</span>
         </h3>
         
+        <!-- Live status counter pill -->
+        <div class="mt-2 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-velvet/90 border border-wineBorder text-xs text-roseGold/90 font-medium shadow-inner">
+          <span class="w-2 h-2 rounded-full bg-vibrantPink animate-pulse"></span>
+          <span id="candlesRemainingText">2 of 2 candles burning 🕯️</span>
+        </div>
       </div>
 
-      <!-- Interactive Blow Progress Meter & Target Limit Indicator -->
-      <div class="w-full max-w-[310px] bg-velvet/85 backdrop-blur-md rounded-2xl p-2.5 border border-wineBorder/80 shadow-md flex flex-col items-center gap-1.5 my-1">
-        
-        <!-- Top Status Bar (Mic state & Candles counter) -->
-        <div class="w-full flex items-center justify-between text-[10px] font-mono px-1">
-          <div id="micStatusText" class="flex items-center gap-1 text-roseGold/90">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span>Mic Ready</span>
-          </div>
-          <span id="candlesRemainingText" class="text-amber-200/90 font-semibold">
-            2 of 2 burning 🕯️
-          </span>
-        </div>
-
-        <!-- The Blow Progress Gauge with Target Limit Indicator -->
-        <div class="relative w-full">
-          <!-- Background track -->
-          <div class="relative w-full h-4 bg-noir/90 rounded-full border border-wineBorder/90 overflow-hidden shadow-inner flex items-center">
-            <!-- Dynamic Progress Fill Bar -->
-            <div id="blowProgressBar" class="h-full w-0 bg-gradient-to-r from-[#9E1B48] via-[#F43F5E] to-[#FBBF24] transition-[width] duration-100 ease-out shadow-[0_0_12px_rgba(244,63,94,0.7)]"></div>
-          </div>
-
-          <!-- Target Limit Indicator Line (at 100% target goal) -->
-          <div class="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-20">
-            <div class="w-1.5 h-6 bg-amber-300 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.9)] border border-noir"></div>
-          </div>
-        </div>
-
-        <!-- Metric Labels: Current Power vs Extinguish Limit Goal -->
-        
-
-        <!-- Quick Mic Trigger & Fallback Manual Blow Button -->
-        <div class="w-full flex items-center gap-1.5 pt-1 border-t border-wineBorder/40">
-          <button id="micToggleBtn" onclick="toggleMicrophoneBlow()" class="flex-1 py-1 px-2 rounded-lg bg-moodyPlum hover:bg-moodyPlum/80 border border-roseGold/30 text-[10px] text-softBlush font-medium flex items-center justify-center gap-1 active:scale-95 transition">
-            <span id="micToggleIcon">🎙️</span>
-            <span id="micToggleLabel">Start Mic</span>
-          </button>
-          <button onclick="extinguishBothCandles()" class="flex-1 py-1 px-2 rounded-lg bg-gradient-to-r from-[#80223B] to-[#591427] border border-roseGold/40 text-[10px] text-softBlush font-medium flex items-center justify-center gap-1 active:scale-95 transition shadow-sm">
-            <span>🌬️</span>
-            <span>Tap to Blow</span>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- 2-TIER CAKE & "21" CANDLES DISPLAY STAGE -->
-      <div class="relative w-64 h-64 flex flex-col items-center justify-end my-auto select-none">
+      <!-- GRAND LUXURY MATURE PINK CAKE & "21" CANDLES DISPLAY STAGE -->
+      <div class="relative w-full max-w-[360px] sm:max-w-[400px] h-[340px] sm:h-[370px] flex flex-col items-center justify-end my-auto select-none pt-2 pb-1">
         
         <!-- ================= NUMBER 21 CANDLES ROW ================= -->
-        <div class="relative z-30 flex items-end justify-center space-x-6 mb-[-12px]">
+        <div class="relative z-30 flex items-end justify-center space-x-8 sm:space-x-10 mb-[-18px]">
           
+          <!-- Candle "2" -->
           <div class="relative flex flex-col items-center cursor-pointer group active:scale-95 transition-transform" onclick="extinguishCandle(2)">
             <!-- Flame 2 -->
-            <div id="flame2" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center">
+            <div id="flame2" class="flame-active relative w-7 h-12 mb-1 flex items-center justify-center">
               <!-- Outer Glow -->
-              <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
+              <div class="absolute inset-0 bg-vibrantPink/40 rounded-full blur-md animate-pulse"></div>
               <!-- Flame Outer -->
-              <div class="w-4 h-7 bg-gradient-to-t from-rose-500 via-amber-400 to-yellow-100 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.9)]"></div>
-              <!-- Flame Inner Blue Core -->
-              <div class="absolute bottom-0 w-2 h-3 bg-blue-300 rounded-full opacity-80"></div>
+              <div class="w-6 h-11 bg-gradient-to-t from-vibrantPink via-amber-300 to-softBlush rounded-full shadow-[0_0_25px_rgba(244,114,182,0.9),0_0_12px_rgba(251,191,36,0.95)]"></div>
+              <!-- Flame Inner Core -->
+              <div class="absolute bottom-0 w-3 h-5 bg-rose-200/90 rounded-full opacity-90"></div>
             </div>
             <!-- Smoke placeholder -->
             <div id="smoke2" class="absolute top-0"></div>
             <!-- Candle Wick -->
-            <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
-            <!-- Sculpted Number "2" Candle Body -->
-            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center group-hover:border-amber-200 transition-colors">
-              <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">2</span>
+            <div class="w-1.5 h-3 bg-stone-800 -mb-0.5 rounded-t-sm"></div>
+            <!-- Sculpted Number "2" Candle Body in Mature Velvet Rose -->
+            <div class="w-16 h-22 sm:w-18 sm:h-24 rounded-2xl bg-gradient-to-b from-[#3D1526] via-[#2A0E1A] to-[#1C0711] border-2 border-roseGold/80 shadow-[0_12px_28px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2)] flex items-center justify-center group-hover:border-vibrantPink transition-all duration-300">
+              <span class="font-serif text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-champagne via-roseGold to-softBlush drop-shadow-[0_4px_8px_rgba(0,0,0,0.95)]">2</span>
             </div>
           </div>
 
+          <!-- Candle "1" -->
           <div class="relative flex flex-col items-center cursor-pointer group active:scale-95 transition-transform" onclick="extinguishCandle(1)">
             <!-- Flame 1 -->
-            <div id="flame1" class="flame-active relative w-5 h-8 mb-1 flex items-center justify-center">
+            <div id="flame1" class="flame-active relative w-7 h-12 mb-1 flex items-center justify-center">
               <!-- Outer Glow -->
-              <div class="absolute inset-0 bg-amber-400/30 rounded-full blur-md animate-pulse"></div>
+              <div class="absolute inset-0 bg-vibrantPink/40 rounded-full blur-md animate-pulse"></div>
               <!-- Flame Outer -->
-              <div class="w-4 h-7 bg-gradient-to-t from-rose-500 via-amber-400 to-yellow-100 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.9)]"></div>
-              <!-- Flame Inner Blue Core -->
-              <div class="absolute bottom-0 w-2 h-3 bg-blue-300 rounded-full opacity-80"></div>
+              <div class="w-6 h-11 bg-gradient-to-t from-vibrantPink via-amber-300 to-softBlush rounded-full shadow-[0_0_25px_rgba(244,114,182,0.9),0_0_12px_rgba(251,191,36,0.95)]"></div>
+              <!-- Flame Inner Core -->
+              <div class="absolute bottom-0 w-3 h-5 bg-rose-200/90 rounded-full opacity-90"></div>
             </div>
             <!-- Smoke placeholder -->
             <div id="smoke1" class="absolute top-0"></div>
             <!-- Candle Wick -->
-            <div class="w-0.5 h-2 bg-stone-800 -mb-0.5"></div>
-            <!-- Sculpted Number "1" Candle Body -->
-            <div class="w-10 h-14 rounded-xl bg-gradient-to-b from-[#8C2E49] via-[#631B30] to-[#42101F] border-2 border-amber-200/60 shadow-[0_6px_16px_rgba(0,0,0,0.8)] flex items-center justify-center group-hover:border-amber-200 transition-colors">
-              <span class="font-serif text-3xl font-extrabold text-amber-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">1</span>
+            <div class="w-1.5 h-3 bg-stone-800 -mb-0.5 rounded-t-sm"></div>
+            <!-- Sculpted Number "1" Candle Body in Mature Velvet Rose -->
+            <div class="w-16 h-22 sm:w-18 sm:h-24 rounded-2xl bg-gradient-to-b from-[#3D1526] via-[#2A0E1A] to-[#1C0711] border-2 border-roseGold/80 shadow-[0_12px_28px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2)] flex items-center justify-center group-hover:border-vibrantPink transition-all duration-300">
+              <span class="font-serif text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-champagne via-roseGold to-softBlush drop-shadow-[0_4px_8px_rgba(0,0,0,0.95)]">1</span>
             </div>
           </div>
 
         </div>
 
-        <!-- ================= 2-TIER DELUXE MATURE PINK CAKE ================= -->
-        <div class="relative z-20 flex flex-col items-center">
+        <!-- ================= GRAND 2-TIER MATURE PINK LUXURY CAKE ================= -->
+        <div class="relative z-20 flex flex-col items-center w-full">
           
-          <!-- TOP CAKE TIER -->
-          <div class="relative w-36 h-14 rounded-2xl bg-gradient-to-b from-[#4A1D2B] via-[#33111C] to-[#200A11] border-2 border-rose-300/40 shadow-[0_8px_20px_rgba(0,0,0,0.7)] flex items-center justify-center overflow-hidden">
-            <!-- Dripping strawberry cream scallops -->
-            <div class="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-rose-400 to-rose-300 opacity-90 rounded-b-xl border-b border-white/30 flex justify-around">
-              <span class="w-2 h-3 bg-rose-300 rounded-b-full"></span>
-              <span class="w-2.5 h-4 bg-rose-300 rounded-b-full"></span>
-              <span class="w-2 h-2.5 bg-rose-300 rounded-b-full"></span>
-              <span class="w-3 h-4 bg-rose-300 rounded-b-full"></span>
-              <span class="w-2 h-3 bg-rose-300 rounded-b-full"></span>
+          <!-- TOP CAKE TIER (Enlarged & Sculpted) -->
+          <div class="relative w-52 sm:w-60 h-22 sm:h-24 rounded-3xl bg-gradient-to-b from-[#3A1426] via-[#280C19] to-[#19060F] border-2 border-roseGold/50 shadow-[0_12px_30px_rgba(0,0,0,0.85)] flex items-center justify-center overflow-hidden">
+            <!-- Dripping dusty rose & champagne frosting scallops -->
+            <div class="absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-dustyRose via-vibrantPink/70 to-dustyRose/90 opacity-95 rounded-b-2xl border-b border-softBlush/40 flex justify-around">
+              <span class="w-3 h-4 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-4 h-6 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-3 h-3.5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-5 h-6.5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-3.5 h-5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-4.5 h-6 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-3 h-4 bg-dustyRose rounded-b-full shadow-sm"></span>
             </div>
-            <!-- Frosting piping dots -->
-            <div class="absolute bottom-1 inset-x-2 flex justify-between text-[8px] text-amber-200/70">
-              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            
+            <!-- Champagne Pearl piped frosting border -->
+            <div class="absolute bottom-2 inset-x-4 flex justify-between text-[11px] text-champagne/80 drop-shadow-sm select-none">
+              <span>✦</span><span>🌸</span><span>✦</span><span>🌸</span><span>✦</span><span>🌸</span><span>✦</span>
+            </div>
+            
+            <!-- Metallic Rose Gold Ribbed Accent Line -->
+            <div class="w-full h-1.5 bg-gradient-to-r from-transparent via-roseGold/70 to-transparent mt-3"></div>
+          </div>
+
+          <!-- BOTTOM CAKE TIER (Enlarged & Sculpted) -->
+          <div class="relative w-72 sm:w-80 h-26 sm:h-28 -mt-3.5 rounded-[2.25rem] bg-gradient-to-b from-[#2F0E1E] via-[#200814] to-[#12030A] border-2 border-wineBorder shadow-[0_25px_50px_rgba(0,0,0,0.95)] flex items-center justify-center overflow-hidden">
+            <!-- Dripping Soft Blush & Rose Ganache -->
+            <div class="absolute top-0 inset-x-0 h-7 bg-gradient-to-b from-dustyRose/90 via-vibrantPink/60 to-dustyRose/75 rounded-b-2xl flex justify-around border-b border-softBlush/30">
+              <span class="w-4 h-5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-5 h-7.5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-3.5 h-4.5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-6 h-8 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-4 h-5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-5.5 h-7 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-4 h-5.5 bg-dustyRose rounded-b-full shadow-sm"></span>
+              <span class="w-5 h-7 bg-dustyRose rounded-b-full shadow-sm"></span>
+            </div>
+            
+            <!-- Rose Gold & Champagne Filigree Ribbon Band -->
+            <div class="w-full h-3 bg-gradient-to-r from-roseGold/30 via-champagne/80 to-roseGold/30 border-y border-softBlush/30 shadow-sm mt-5 flex items-center justify-around text-[7px] text-wineBorder">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+            
+            <!-- Lower piping pearls -->
+            <div class="absolute bottom-2 inset-x-5 flex justify-between text-[10px] text-roseGold/60 select-none">
+              <span>•</span><span>✦</span><span>•</span><span>✦</span><span>•</span><span>✦</span><span>•</span><span>✦</span><span>•</span>
             </div>
           </div>
 
-          <!-- BOTTOM CAKE TIER -->
-          <div class="relative w-52 h-18 -mt-2 rounded-3xl bg-gradient-to-b from-[#3D1421] via-[#2A0B15] to-[#17050B] border-2 border-wineBorder shadow-[0_15px_35px_rgba(0,0,0,0.9)] flex items-center justify-center overflow-hidden">
-            <!-- Dripping glaze band -->
-            <div class="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-rose-400/90 to-rose-300/80 rounded-b-2xl flex justify-around">
-              <span class="w-3 h-3 bg-rose-300 rounded-b-full"></span>
-              <span class="w-3.5 h-5 bg-rose-300 rounded-b-full"></span>
-              <span class="w-2.5 h-3 bg-rose-300 rounded-b-full"></span>
-              <span class="w-4 h-5.5 bg-rose-300 rounded-b-full"></span>
-              <span class="w-3 h-3.5 bg-rose-300 rounded-b-full"></span>
-            </div>
-            <!-- Gold ribbon border around bottom tier -->
-            <div class="w-full h-2 bg-gradient-to-r from-amber-300/40 via-amber-200/80 to-amber-300/40 shadow-sm mt-3"></div>
+          <!-- LUXURY ROSE GOLD & CHAMPAGNE PEDESTAL STAND -->
+          <div class="w-80 sm:w-92 h-6 rounded-full bg-gradient-to-r from-roseGold via-champagne to-roseGold border border-softBlush/50 shadow-[0_10px_35px_rgba(221,167,165,0.25)] -mt-2 z-10 flex items-center justify-center">
+            <div class="w-3/4 h-1 bg-white/40 rounded-full blur-[0.5px]"></div>
           </div>
-
-          <!-- LUXURY CAKE PEDESTAL STAND -->
-          <div class="w-60 h-4 rounded-full bg-gradient-to-r from-roseGold/60 via-champagne to-roseGold/60 border border-white/40 shadow-xl -mt-1 z-10"></div>
-          <div class="w-28 h-3 rounded-b-xl bg-gradient-to-b from-[#2B1720] to-[#12080D] border-x border-b border-wineBorder shadow-md"></div>
+          <!-- Fluted pedestal base -->
+          <div class="w-44 h-5 rounded-b-3xl bg-gradient-to-b from-[#26101B] to-[#12050C] border-x border-b border-wineBorder shadow-lg"></div>
         </div>
 
       </div>
@@ -783,7 +781,7 @@
       <div class="flex flex-col items-center gap-1 mb-1">
         <span class="text-xs text-roseGold/80 flex items-center gap-1.5 animate-pulse">
           <span>✦</span>
-          <span>Tap each number to blow out its flame</span>
+          <span>Tap each candle to blow out its flame</span>
           <span>✦</span>
         </span>
       </div>
@@ -969,6 +967,127 @@
     let audioCtx = null;
     let soundEnabled = true;
 
+    let currentPlayingMusic = null;
+    let fadeIntervals = {};
+
+    let isGiftLoopFading = false;
+    const GIFT_START_TIME = 17; // Starts at 17 seconds into the track
+    const GIFT_LOOP_LIMIT = 60; // Stops exactly at the 1-minute (60s) mark of the track
+    const GIFT_FADE_START = GIFT_LOOP_LIMIT - 3.5; // Start fading out ~3.5s before the 1-minute mark (56.5s)
+
+    // Monitor gift background music to fade out before 1-minute mark and loop cleanly back to 17s
+    const musicGiftAudio = document.getElementById('musicGift');
+    if (musicGiftAudio) {
+      musicGiftAudio.addEventListener('timeupdate', function () {
+        // Trigger smooth fade out as it approaches the 1-minute mark (60s)
+        if (this.currentTime >= GIFT_FADE_START && !isGiftLoopFading && currentPlayingMusic === this) {
+          isGiftLoopFading = true;
+          const remainingTime = Math.max(800, (GIFT_LOOP_LIMIT - this.currentTime) * 1000);
+          
+          fadeAudio(this, 0, remainingTime, () => {
+            // Once faded out completely to 0 volume, reset back to the 17-second mark
+            this.currentTime = GIFT_START_TIME;
+            if (soundEnabled && currentPlayingMusic === this) {
+              if (this.paused) {
+                this.play().catch(() => {});
+              }
+              // Fade back in smoothly from the 17-second mark
+              fadeAudio(this, 0.55, 1400, () => {
+                isGiftLoopFading = false;
+              });
+            } else {
+              isGiftLoopFading = false;
+            }
+          });
+        }
+
+        // Safety guard: if audio skips past 1-minute mark without trigger, reset to 17s immediately
+        if (this.currentTime >= GIFT_LOOP_LIMIT && !isGiftLoopFading) {
+          this.currentTime = GIFT_START_TIME;
+          if (this.paused && soundEnabled) {
+            this.play().catch(() => {});
+          }
+        }
+      });
+
+      // Guard if audio file ends before 1-minute mark
+      musicGiftAudio.addEventListener('ended', function () {
+        this.currentTime = GIFT_START_TIME;
+        if (soundEnabled && currentPlayingMusic === this) {
+          this.play().catch(() => {});
+        }
+      });
+    }
+
+    function fadeAudio(audio, targetVol, duration = 1200, onComplete = null) {
+      if (!audio) return;
+      if (fadeIntervals[audio.id]) {
+        clearInterval(fadeIntervals[audio.id]);
+      }
+
+      const stepTime = 50;
+      const totalSteps = duration / stepTime;
+      const startVol = audio.volume;
+      const delta = (targetVol - startVol) / totalSteps;
+      let currentStep = 0;
+
+      fadeIntervals[audio.id] = setInterval(() => {
+        currentStep++;
+        let newVol = audio.volume + delta;
+        if ((delta > 0 && newVol >= targetVol) || (delta < 0 && newVol <= targetVol) || currentStep >= totalSteps) {
+          audio.volume = Math.max(0, Math.min(1, targetVol));
+          clearInterval(fadeIntervals[audio.id]);
+          delete fadeIntervals[audio.id];
+          if (onComplete) onComplete();
+        } else {
+          audio.volume = Math.max(0, Math.min(1, newVol));
+        }
+      }, stepTime);
+    }
+
+    function playTrackWithFade(trackId, targetVolume = 0.5) {
+      const newAudio = document.getElementById(trackId);
+      if (!newAudio) return;
+
+      if (currentPlayingMusic && currentPlayingMusic.id === trackId && !currentPlayingMusic.paused) {
+        return; // Already actively playing this track
+      }
+
+      const oldAudio = currentPlayingMusic;
+      currentPlayingMusic = newAudio;
+
+      if (!soundEnabled) {
+        if (oldAudio) {
+          oldAudio.pause();
+          oldAudio.currentTime = 0;
+        }
+        return;
+      }
+
+      // Smoothly fade out the previous track
+      if (oldAudio && oldAudio !== newAudio && !oldAudio.paused) {
+        fadeAudio(oldAudio, 0, 1000, () => {
+          oldAudio.pause();
+          oldAudio.currentTime = 0;
+        });
+      }
+
+      // Smoothly fade in the new track
+      newAudio.volume = 0;
+      if (newAudio.id === 'musicGift') {
+        newAudio.currentTime = GIFT_START_TIME;
+        isGiftLoopFading = false;
+      }
+      const playPromise = newAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          fadeAudio(newAudio, targetVolume, 1400);
+        }).catch(() => {
+          // Playback guard for mobile gesture constraints
+        });
+      }
+    }
+
     function getAudioContext() {
       if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -983,18 +1102,24 @@
     function toggleSound() {
       soundEnabled = !soundEnabled;
       const icon = document.getElementById('soundIcon');
-      const bgMusic = document.getElementById('bgMusic');
       
       if (soundEnabled) {
-        icon.innerText = '🔔';
+        if (icon) icon.innerText = '🔔';
         playTone(659.25, 0.25);
-        if (bgMusic && bgMusic.paused) {
-          bgMusic.play().catch(() => {});
+        if (currentPlayingMusic) {
+          currentPlayingMusic.volume = 0;
+          currentPlayingMusic.play().then(() => {
+            fadeAudio(currentPlayingMusic, 0.5, 1200);
+          }).catch(() => {});
+        } else {
+          playTrackWithFade('musicLanding', 0.5);
         }
       } else {
-        icon.innerText = '🔕';
-        if (bgMusic) {
-          bgMusic.pause();
+        if (icon) icon.innerText = '🔕';
+        if (currentPlayingMusic && !currentPlayingMusic.paused) {
+          fadeAudio(currentPlayingMusic, 0, 600, () => {
+            currentPlayingMusic.pause();
+          });
         }
       }
     }
@@ -1157,31 +1282,26 @@
     }
 
     function goToHomeScene() {
-      stopMicrophone();
       playTone(440, 0.2);
+      playTrackWithFade('musicLanding', 0.5);
       transitionToScene('homeScene');
     }
 
     function goToEnvelopeScene() {
-      stopMicrophone();
       playTone(523.25, 0.2);
+      playTrackWithFade('musicLetter', 0.5);
       transitionToScene('cardScene');
     }
 
     function goToCandleScene() {
       playTone(587.33, 0.25);
+      playTrackWithFade('musicCandle', 0.55);
       transitionToScene('candleScene');
-      // Automatically attempt mic activation when arriving at cake scene
-      setTimeout(() => {
-        if (!candle1Out || !candle2Out) {
-          startMicrophoneBlowDetection();
-        }
-      }, 350);
     }
 
     function goToGiftScene() {
-      stopMicrophone();
       playTone(698.46, 0.25);
+      playTrackWithFade('musicGift', 0.55);
       transitionToScene('giftScene');
     }
 
@@ -1321,6 +1441,7 @@
       const seal = document.getElementById('waxSealButton');
 
       playTone(523.25, 0.2);
+      playTrackWithFade('musicLetter', 0.5);
       if (seal) seal.style.transform = 'translate(-50%, -50%) scale(1.25) rotate(15deg)';
 
       setTimeout(() => {
@@ -1366,11 +1487,8 @@
       getAudioContext();
       playTone(523.25, 0.3);
 
-      const bgMusic = document.getElementById('bgMusic');
-      if (bgMusic) {
-        bgMusic.volume = 0.5;
-        bgMusic.play().catch(() => {});
-      }
+      // Start the landing track with a gentle fade-in
+      playTrackWithFade('musicLanding', 0.5);
 
       transitionToScene('introScene');
       setTimeout(playIntroSequence, 400);
@@ -1437,7 +1555,7 @@
 
       setTimeout(() => {
         transitionToScene('homeScene');
-      }, 1200);
+      }, 4200);
     }
 
     function triggerImmediateIntro() {
@@ -1456,178 +1574,6 @@
   <script>
     let candle1Out = false;
     let candle2Out = false;
-    let micStream = null;
-    let micAudioCtx = null;
-    let micAnalyser = null;
-    let micAnimFrame = null;
-    let blowProgress = 0;
-    let isListeningForBlow = false;
-
-    function toggleMicrophoneBlow() {
-      if (isListeningForBlow) {
-        stopMicrophone();
-      } else {
-        startMicrophoneBlowDetection();
-      }
-    }
-
-    async function startMicrophoneBlowDetection() {
-      if (candle1Out && candle2Out) return;
-
-      const micStatus = document.getElementById('micStatusText');
-      const micLabel = document.getElementById('micToggleLabel');
-      const micIcon = document.getElementById('micToggleIcon');
-
-      try {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          if (micStatus) micStatus.innerHTML = `<span class="text-amber-300">⚠️ Mic not supported</span>`;
-          return;
-        }
-
-        const stream = await navigator.mediaDevices.getUserMedia({ 
-          audio: { 
-            echoCancellation: false,
-            noiseSuppression: false,
-            autoGainControl: false 
-          } 
-        });
-
-        micStream = stream;
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        micAudioCtx = new AudioCtx();
-        const source = micAudioCtx.createMediaStreamSource(stream);
-        micAnalyser = micAudioCtx.createAnalyser();
-        micAnalyser.fftSize = 512;
-        micAnalyser.smoothingTimeConstant = 0.2;
-        source.connect(micAnalyser);
-
-        isListeningForBlow = true;
-        if (micStatus) {
-          micStatus.innerHTML = `
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="text-emerald-300">Listening — Blow now!</span>
-          `;
-        }
-        if (micLabel) micLabel.innerText = "Stop Mic";
-        if (micIcon) micIcon.innerText = "🛑";
-
-        analyzeBlowStream();
-      } catch (err) {
-        if (micStatus) {
-          micStatus.innerHTML = `<span class="text-amber-300">Mic blocked, tap to blow</span>`;
-        }
-        if (micLabel) micLabel.innerText = "Enable Mic";
-        if (micIcon) micIcon.innerText = "🎙️";
-      }
-    }
-
-    function analyzeBlowStream() {
-      if (!isListeningForBlow || !micAnalyser) return;
-
-      const bufferLength = micAnalyser.frequencyBinCount;
-      const dataArray = new Uint8Array(bufferLength);
-      micAnalyser.getByteFrequencyData(dataArray);
-
-      // Low frequency turbulence analysis (0-250Hz) specific to direct wind rumble on mic
-      let lowEnergy = 0;
-      const lowRange = Math.min(16, bufferLength);
-      for (let i = 1; i < lowRange; i++) {
-        lowEnergy += dataArray[i];
-      }
-      const avgLow = lowEnergy / lowRange;
-
-      // Higher vocal/music frequencies
-      let highEnergy = 0;
-      for (let i = lowRange; i < bufferLength; i++) {
-        highEnergy += dataArray[i];
-      }
-      const avgHigh = highEnergy / (bufferLength - lowRange);
-
-      // Distinguish physical breath turbulence on the phone mic
-      const isBlowing = (avgLow > 60 && (avgLow > avgHigh * 1.25 || avgLow > 80));
-
-      const flame1 = document.getElementById('flame1');
-      const flame2 = document.getElementById('flame2');
-      const progressBar = document.getElementById('blowProgressBar');
-      const percentText = document.getElementById('blowPercentText');
-      const micStatus = document.getElementById('micStatusText');
-
-      if (isBlowing && (!candle1Out || !candle2Out)) {
-        // Accumulate sustained breath progress smoothly
-        const increment = Math.min(12, Math.max(3, (avgLow / 12)));
-        blowProgress += increment;
-        if (blowProgress > 100) blowProgress = 100;
-
-        if (micStatus) {
-          micStatus.innerHTML = `
-            <span class="w-2 h-2 rounded-full bg-vibrantPink animate-ping"></span>
-            <span class="text-vibrantPink font-semibold">Blowing! Keep going!</span>
-          `;
-        }
-
-        // Wobble and shrink flames dynamically under breath force
-        const lean = (Math.random() - 0.5) * 26;
-        const scale = Math.max(0.3, 1 - (blowProgress / 125));
-        if (flame1 && !candle1Out) flame1.style.transform = `scale(${scale}) rotate(${lean}deg)`;
-        if (flame2 && !candle2Out) flame2.style.transform = `scale(${scale}) rotate(${lean}deg)`;
-      } else {
-        // Smooth decay if breath pauses
-        blowProgress -= 3.5;
-        if (blowProgress < 0) blowProgress = 0;
-
-        if (micStatus && isListeningForBlow) {
-          micStatus.innerHTML = `
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="text-emerald-300">Listening — Blow now!</span>
-          `;
-        }
-
-        if (flame1 && !candle1Out) flame1.style.transform = '';
-        if (flame2 && !candle2Out) flame2.style.transform = '';
-      }
-
-      // Update progress bar width and limit percentage readout
-      const displayPct = Math.round(blowProgress);
-      if (progressBar) progressBar.style.width = `${displayPct}%`;
-      if (percentText) percentText.innerText = `${displayPct}%`;
-
-      // Trigger extinguish upon reaching the 100% threshold limit
-      if (blowProgress >= 100) {
-        if (percentText) percentText.innerText = `100% — EXTIN処!`;
-        extinguishBothCandles();
-        return;
-      }
-
-      micAnimFrame = requestAnimationFrame(analyzeBlowStream);
-    }
-
-    function stopMicrophone() {
-      isListeningForBlow = false;
-      if (micAnimFrame) cancelAnimationFrame(micAnimFrame);
-      if (micStream) {
-        micStream.getTracks().forEach(track => track.stop());
-        micStream = null;
-      }
-      if (micAudioCtx && micAudioCtx.state !== 'closed') {
-        micAudioCtx.close().catch(() => {});
-        micAudioCtx = null;
-      }
-
-      const micLabel = document.getElementById('micToggleLabel');
-      const micIcon = document.getElementById('micToggleIcon');
-      const micStatus = document.getElementById('micStatusText');
-      if (micLabel) micLabel.innerText = "Start Mic";
-      if (micIcon) micIcon.innerText = "🎙️";
-      if (micStatus) {
-        micStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-stone-500"></span><span>Mic Off</span>`;
-      }
-    }
-
-    function extinguishBothCandles() {
-      if (!candle1Out) extinguishCandle(1);
-      if (!candle2Out) extinguishCandle(2);
-      stopMicrophone();
-    }
 
     function extinguishCandle(num) {
       if (num === 1 && !candle1Out) {
@@ -1648,7 +1594,6 @@
 
       // Check if both candles have been extinguished
       if (candle1Out && candle2Out) {
-        stopMicrophone();
         triggerAllCandlesCelebration();
       }
     }
@@ -1659,9 +1604,9 @@
 
       const remaining = (!candle1Out ? 1 : 0) + (!candle2Out ? 1 : 0);
       if (remaining === 2) {
-        counter.innerText = "2 of 2 burning 🕯️";
+        counter.innerText = "2 of 2 candles burning 🕯️";
       } else if (remaining === 1) {
-        counter.innerText = "1 candle remaining! ✨";
+        counter.innerText = "1 candle remaining! Make your wish ✨";
       } else {
         counter.innerText = "All extinguished! ✨";
       }
@@ -1671,7 +1616,7 @@
       playMelodicCelebration();
 
       confetti({
-        particleCount: 80,
+        particleCount: 85,
         spread: 90,
         origin: { y: 0.6 },
         colors: ['#F59E0B', '#F472B6', '#F7E7CE', '#FCE7ED', '#FB7185']
@@ -1704,16 +1649,15 @@
     function relightCandles() {
       candle1Out = false;
       candle2Out = false;
-      blowProgress = 0;
 
       const f1 = document.getElementById('flame1');
       const f2 = document.getElementById('flame2');
       if (f1) {
-        f1.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center';
+        f1.className = 'flame-active relative w-7 h-12 mb-1 flex items-center justify-center';
         f1.style.transform = '';
       }
       if (f2) {
-        f2.className = 'flame-active relative w-5 h-8 mb-1 flex items-center justify-center';
+        f2.className = 'flame-active relative w-7 h-12 mb-1 flex items-center justify-center';
         f2.style.transform = '';
       }
 
@@ -1723,16 +1667,8 @@
         wishCard.classList.remove('flex');
       }
 
-      const progressBar = document.getElementById('blowProgressBar');
-      const percentText = document.getElementById('blowPercentText');
-      if (progressBar) progressBar.style.width = '0%';
-      if (percentText) percentText.innerText = '0%';
-
       updateCandleCountUI();
       playTone(523.25, 0.2);
-
-      // Re-enable microphone detection on relight
-      startMicrophoneBlowDetection();
     }
 
     function playMelodicCelebration() {
