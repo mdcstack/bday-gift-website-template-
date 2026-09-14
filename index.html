@@ -137,6 +137,40 @@
       -webkit-user-select: text;
     }
 
+    /* Protection & Anti-Download Styling */
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      -webkit-touch-callout: none !important;
+      pointer-events: auto;
+    }
+
+    /* Print Screen & Print-to-PDF Blocker */
+    @media print {
+      html, body {
+        display: none !important;
+        visibility: hidden !important;
+      }
+    }
+
+    /* Privacy Screen Shield when app loses focus (Screen recording / App switcher deterrent) */
+    #privacyCurtain {
+      position: fixed;
+      inset: 0;
+      background: #110D10;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #F472B6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
     /* Wax seal button pulsing glow */
     @keyframes sealGlow {
       0%, 100% { box-shadow: 0 0 15px rgba(244, 114, 182, 0.3); }
@@ -253,6 +287,12 @@
 
   <!-- Ambient Light Orb in Background -->
   <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] bg-vibrantPink/10 rounded-full blur-[95px] pointer-events-none z-0 animate-breath"></div>
+
+  <!-- Anti-Screenshot / Blur Shield on App Switch -->
+  <div id="privacyCurtain" class="flex-col gap-2 select-none">
+    <span class="text-3xl">🔒</span>
+    <p class="text-xs font-medium tracking-wider uppercase text-softBlush/80">Content Protected</p>
+  </div>
 
   <!-- Dedicated Background Music Players for each section -->
   <!-- 1. Landing & Home Hub Music -->
@@ -476,7 +516,7 @@
                 <span class="text-[9px] text-roseGold/70 font-mono">21st Chapter</span>
               </div>
               <p class="text-[10px] text-softBlush/85 leading-relaxed font-sans line-clamp-3">
-                "Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig..."
+                "Meeting you was quite unexpected, I didnt foresee na we would enjoy each others company to the point na we went from lm to ig..."
               </p>
             </div>
             <span class="text-[9px] text-dustyRose/70 italic text-right">Unfolding letter...</span>
@@ -562,7 +602,7 @@
           </div>
 
           <p>
-            Meeting you was quite unexpected, I didnt forsee na we would enjoy each others company to the point na we went from lm to ig.
+            Meeting you was quite unexpected, I didnt foresee na we would enjoy each others company to the point na we went from lm to ig.
           </p>
 
           <div class="bg-moodyPlum/40 p-3 rounded-2xl border border-wineBorder/50">
@@ -1328,20 +1368,62 @@
 
     const spicyPhotos = [
       {
-        url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80",
+        url: "./Media/pic12.jpg",
         tag: "✦ The Mirror Pic",
         caption: "That picture is burned in my memory na... your so hot lovey (wanna wrap you in my arms)."
       },
       {
-        url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
-        tag: "✦ Pure Temptation",
-        caption: "Your lips look so tempting po and your cheeks makes me want to spoil you ng kisses."
+        url: "./Media/pic11.jpg",
+        tag: "✦ Image You Sent, Laying In Bed",
+        caption: "Your legs looks so tempting po and your curves that makes me want to grip you tight yet gently."
       },
       {
-        url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&auto=format&fit=crop&q=80",
+        url: "./Media/pic3.jpg",
         tag: "✦ With & Without Makeup",
-        caption: "So cute and undeniably gorgeous, every single version of you."
+        caption: "So cute and undeniably charming, every single version of you."
+      },
+      {
+        url: "./Media/pic4.jpg",
+        tag: "✦ Pure Temptation",
+        caption: "Your lips look so tempting po and your cheeks makes me want to spoil you with kisses."
       }
+      ,
+      {
+        url: "./Media/pic6.jpg",
+        tag: "✦ Maroon On You",
+        caption: "My fav color po is green till I saw that maroon as your bottom, such a sight to see loveyy."
+      }
+      ,
+      {
+        url: "./Media/pic5.jpg",
+        tag: "✦ Smiles That I Wanna Bite",
+        caption: "Your smile po with those lips won't need lips stick lovey to turn it red as long as you're with me."
+      }
+      ,
+      {
+        url: "./Media/pic9.jpg",
+        tag: "✦ Vms that Melts Me",
+        caption: "Listening to you lovey makes me weak every single time, looking forward to more sounds that you can make for me."
+      }
+      ,
+      {
+        url: "./Media/pic13.jpg",
+        tag: "✦ Danger Through The Screen",
+        caption: "Every photo you send is a test of my patience lovey... you're lucky there’s a screen protecting you for now po."
+      }
+      ,
+      {
+        url: "./Media/pic9.jpg",
+        tag: "✦ You've Been Such A Good Girl",
+        caption: "Saying yes to my demands is the easy part lovey; the question is, can you take it like the sweet, good girl you are?"
+      }
+      ,
+      {
+        url: "./Media/pic10.jpg",
+        tag: "✦ Your Tone On The Phone",
+        caption: "Hearing your breath over the phone is already torture lovey; I can't wait until I'm the one taking it away in person."
+      }
+     
     ];
 
     function openGiftBox() {
@@ -1733,6 +1815,92 @@
     window.addEventListener('load', () => {
       runTypewriter();
     });
+  </script>
+
+  <script>
+    /* ================= CONTENT PROTECTION & ANTI-COPY / ANTI-DOWNLOAD SYSTEM ================= */
+    (function initContentProtection() {
+      // 1. Disable Right-Click Context Menu (Desktop & Mobile Long-Press)
+      document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+      }, { capture: true });
+
+      // 2. Prevent Copy and Cut Events
+      document.addEventListener('copy', (e) => {
+        e.preventDefault();
+        if (e.clipboardData) {
+          e.clipboardData.setData('text/plain', '');
+        }
+      });
+      document.addEventListener('cut', (e) => {
+        e.preventDefault();
+      });
+
+      // 3. Prevent Drag-and-Drop Image Extraction
+      document.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+        return false;
+      });
+
+      // 4. Keyboard Shortcuts Blocker (DevTools, Save Page, Print, View Source)
+      window.addEventListener('keydown', (e) => {
+        // Prevent PrintScreen key
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+          triggerScreenMask();
+        }
+
+        // Prevent Ctrl+S, Ctrl+P, Ctrl+U, Ctrl+C (Windows/Linux) & Cmd+S, Cmd+P, Cmd+U, Cmd+C (macOS)
+        if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'u', 'c', 'x'].includes(e.key.toLowerCase())) {
+          e.preventDefault();
+        }
+
+        // Prevent DevTools Shortcuts: F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+        if (
+          e.key === 'F12' || 
+          ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()))
+        ) {
+          e.preventDefault();
+        }
+      });
+
+      // 5. Clear Clipboard on PrintScreen keyup
+      window.addEventListener('keyup', (e) => {
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+          triggerScreenMask();
+        }
+      });
+
+      // 6. Privacy Shield on Blur / App Switch (Deterrent for Multitasking / App-Switcher Screenshots on iOS/Android)
+      const curtain = document.getElementById('privacyCurtain');
+      let maskTimeout = null;
+
+      function triggerScreenMask() {
+        if (curtain) {
+          curtain.style.display = 'flex';
+          clearTimeout(maskTimeout);
+          maskTimeout = setTimeout(() => {
+            curtain.style.display = 'none';
+          }, 1600);
+        }
+      }
+
+      window.addEventListener('blur', () => {
+        if (curtain) curtain.style.display = 'flex';
+      });
+
+      window.addEventListener('focus', () => {
+        if (curtain) curtain.style.display = 'none';
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (curtain) curtain.style.display = 'flex';
+        } else {
+          if (curtain) curtain.style.display = 'none';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
